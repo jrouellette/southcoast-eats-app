@@ -1,0 +1,450 @@
+:root {
+  --navy: #0d2a4a;
+  --navy-soft: #173d61;
+  --blue: #6f9db8;
+  --teal: #4f9c91;
+  --teal-light: #e5f3f0;
+  --cream: #f7f8f6;
+  --white: #ffffff;
+  --text: #183047;
+  --muted: #687b89;
+  --warm: #f3b84b;
+  --border: #dce5e8;
+  --shadow: 0 10px 30px rgba(13, 42, 74, 0.10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.45;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 76px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--warm);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.brand-name {
+  color: var(--navy);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+}
+
+.brand-name span {
+  color: var(--teal);
+}
+
+.tagline {
+  margin-top: -2px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+main {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 34px 18px 60px;
+}
+
+.hero {
+  text-align: center;
+}
+
+.eyebrow,
+.section-label {
+  margin: 0 0 6px;
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(34px, 9vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+}
+
+.hero > p:not(.eyebrow) {
+  max-width: 520px;
+  margin: 14px auto 24px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.location-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.location-icon {
+  display: grid;
+  flex: 0 0 44px;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--teal-light);
+  color: var(--teal);
+  font-size: 25px;
+}
+
+.location-text {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.location-text strong {
+  color: var(--navy);
+  font-size: 14px;
+}
+
+.location-text span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.location-card button {
+  flex-shrink: 0;
+  padding: 10px 13px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--navy);
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+.search-link {
+  margin-top: 13px;
+  border: 0;
+  background: transparent;
+  color: var(--navy-soft);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.food-section,
+.service-section,
+.pick-section {
+  margin-top: 42px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-title-row h2,
+.service-section h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 25px;
+  letter-spacing: -0.8px;
+}
+
+.surprise {
+  padding: 8px 11px;
+  border: 1px solid #e2d5ad;
+  border-radius: 999px;
+  background: #fff9e9;
+  color: #9a6915;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.food-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 66px;
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: 0 4px 14px rgba(13, 42, 74, 0.05);
+  font-size: 24px;
+  text-align: left;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.food-card span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.food-card:hover,
+.food-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--teal);
+  box-shadow: 0 8px 20px rgba(13, 42, 74, 0.10);
+}
+
+.service-section {
+  padding-top: 5px;
+}
+
+.service-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.service-row::-webkit-scrollbar {
+  display: none;
+}
+
+.service {
+  flex: 0 0 auto;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.service.active {
+  border-color: var(--teal);
+  background: var(--teal-light);
+  color: #28776e;
+}
+
+.pick-section {
+  margin-top: 48px;
+}
+
+.pick-label {
+  margin-bottom: 12px;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.pick-card {
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: 0 14px 40px rgba(13, 42, 74, 0.14);
+}
+
+.pick-image {
+  display: grid;
+  min-height: 150px;
+  place-items: center;
+  background:
+    linear-gradient(135deg, #dcecef, #b8d7d5);
+  color: white;
+  font-size: 62px;
+}
+
+.pick-content {
+  padding: 20px;
+}
+
+.pick-content h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+.pick-meta {
+  margin: 5px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.reason {
+  display: flex;
+  gap: 10px;
+  padding: 13px;
+  border-radius: 14px;
+  background: #f0f6f5;
+}
+
+.reason strong {
+  color: var(--teal);
+  font-size: 12px;
+}
+
+.reason p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.go-button {
+  width: 100%;
+  margin-top: 17px;
+  padding: 15px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--navy);
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.alternatives {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.alternatives button {
+  min-height: 62px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: white;
+  color: var(--navy);
+  font-size: 17px;
+}
+
+.alternatives button:last-child {
+  border-right: 0;
+}
+
+.alternatives small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 25px 18px 90px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+footer span:first-child {
+  color: var(--navy);
+  font-weight: 900;
+}
+
+@media (min-width: 600px) {
+  .food-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .food-card {
+    min-height: 74px;
+  }
+
+  main {
+    padding-top: 50px;
+  }
+}
+
+@media (max-width: 420px) {
+  .location-card {
+    flex-wrap: wrap;
+  }
+
+  .location-text {
+    flex-basis: calc(100% - 60px);
+  }
+
+  .location-card button {
+    width: 100%;
+  }
+
+  .food-grid {
+    gap: 8px;
+  }
+
+  .food-card {
+    padding: 11px;
+  }
+
+  .food-card span {
+    font-size: 13px;
+  }
+}
