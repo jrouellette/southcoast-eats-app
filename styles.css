@@ -199,18 +199,18 @@ footer{
 
 @media(max-width:650px){
   .header{
-    height:108px;
+    height:92px;
     grid-template-columns:42px 1fr 42px;
-    padding:4px 8px;
+    padding:2px 8px;
   }
   .menu{font-size:32px}
   .search{font-size:43px}
   .logo{
-    height:101px;
+    height:87px;
     width:100%;
   }
   .intro{
-    padding:18px 12px 15px;
+    padding:14px 12px 11px;
   }
   .intro h1{
     font-size:30px;
@@ -226,7 +226,7 @@ footer{
   .location{margin-top:0}
   .current,.town-toggle{
     grid-template-columns:42px 1fr 24px;
-    padding:13px 15px;
+    padding:10px 15px;
     border-radius:15px;
   }
   .current b{font-size:16px}
@@ -238,13 +238,13 @@ footer{
     font-size:12px;
     padding:8px 12px;
   }
-  .food-grid{gap:8px}
+  .food-grid{gap:7px}
   .food-grid button{
-    height:88px;
+    height:77px;
     border-radius:13px;
-    font-size:31px;
+    font-size:28px;
   }
-  .food-grid b{font-size:13px}
+  .food-grid b{font-size:12px}
   .food h2,.how h2{font-size:24px}
   .surprise{
     font-size:18px;
