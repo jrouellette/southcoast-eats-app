@@ -8,30 +8,33 @@
 </head>
 <body>
 <div class="app">
+
 <header class="header">
   <button class="menu" aria-label="Menu">☰</button>
   <img src="brand-logo.jpg" alt="SouthCoast Eats — Local Picks. Better Meals." class="logo">
   <button class="search" aria-label="Search">⌕</button>
 </header>
 
-<section class="hero">
-  <img src="coastal-hero.jpg" class="hero-photo" alt="">
-  <div class="hero-bottom">
-    <div class="side-slogan">Good<br>Food<br>Happens<br>Here</div>
-    <h1>What sounds good?</h1>
-    <p>Find great food around the SouthCoast.</p>
-  </div>
+<section class="intro">
+  <h1>What sounds good?</h1>
+  <p>Find great food around the SouthCoast.</p>
 </section>
 
 <main>
 <section class="location">
   <button class="current" id="current">
-    <span class="loc">➤</span><span><b>Use my current location</b><small>Find what’s open near you</small></span><i>›</i>
+    <span class="loc">➤</span>
+    <span><b>Use my current location</b><small>Find what’s open near you</small></span>
+    <i>›</i>
   </button>
+
   <button class="town-toggle" id="townToggle">
-    <span class="pin">●</span><b>Search near a town instead</b><i>›</i>
+    <span class="pin">●</span>
+    <b>Search near a town instead</b>
+    <i>›</i>
   </button>
-  <div class="towns" id="towns">
+
+  <div class="towns" id="towns" hidden>
     <button>Fall River</button><button>New Bedford</button><button>Dartmouth</button><button>Somerset</button><button>Tiverton</button>
     <button>Westport</button><button>Swansea</button><button>Seekonk</button><button>Bristol</button>
   </div>
@@ -58,17 +61,43 @@
 
 <footer><img src="coastal-footer.jpg" alt="" class="footer-photo"></footer>
 </div>
+
 <script>
 const msg=document.getElementById('msg');
-document.getElementById('current').onclick=()=>msg.textContent='Using your current location.';
-document.getElementById('townToggle').onclick=()=>{
- const t=document.getElementById('towns'); t.hidden=!t.hidden;
+
+document.getElementById('current').onclick=()=>{
+  msg.textContent='Using your current location.';
 };
-document.querySelectorAll('.towns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.towns button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
-document.querySelectorAll('.food-grid button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.food-grid button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
-document.getElementById('surprise').onclick=()=>{const a=[...document.querySelectorAll('.food-grid button')];a.forEach(x=>x.classList.remove('sel'));a[Math.floor(Math.random()*a.length)].classList.add('sel')};
-document.querySelectorAll('.how-grid button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.how-grid button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
-document.getElementById('find').onclick=()=>msg.textContent='Recommendation flow coming next.';
+
+document.getElementById('townToggle').onclick=()=>{
+  const t=document.getElementById('towns');
+  t.hidden=!t.hidden;
+};
+
+document.querySelectorAll('.towns button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.towns button').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel');
+});
+
+document.querySelectorAll('.food-grid button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.food-grid button').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel');
+});
+
+document.getElementById('surprise').onclick=()=>{
+  const a=[...document.querySelectorAll('.food-grid button')];
+  a.forEach(x=>x.classList.remove('sel'));
+  a[Math.floor(Math.random()*a.length)].classList.add('sel');
+};
+
+document.querySelectorAll('.how-grid button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.how-grid button').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel');
+});
+
+document.getElementById('find').onclick=()=>{
+  msg.textContent="Recommendation flow coming next.";
+};
 </script>
 </body>
 </html>
