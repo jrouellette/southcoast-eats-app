@@ -1,268 +1,119 @@
  :root{
-  --navy:#0b315d;
-  --teal:#1599a2;
-  --sky:#e8f7fc;
-  --paper:#fbfeff;
-  --line:#dcebf2;
+  --navy:#0b315d;--teal:#1599a2;--sky:#e8f7fc;--paper:#fbfeff;--line:#dcebf2;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:#dfe9ee;
-  color:var(--navy);
-  font-family:Arial,"Trebuchet MS",sans-serif;
-}
-.app{
-  width:min(100%,900px);
-  margin:auto;
-  background:var(--paper);
-  min-height:100vh;
-  overflow:hidden;
-}
-.header{
-  height:160px;
-  background:#eaf8fd;
-  display:grid;
-  grid-template-columns:90px 1fr 90px;
-  align-items:center;
-  padding:8px 24px;
-}
-.menu,.search{
-  border:0;
-  background:none;
-  color:var(--navy);
-  cursor:pointer;
-  font-size:47px;
-}
-.search{font-size:62px}
-.logo{
-  width:min(500px,100%);
-  height:145px;
-  object-fit:contain;
-  margin:auto;
-}
-.intro{
-  text-align:center;
-  padding:24px 18px 18px;
-  background:linear-gradient(#eaf8fd,#fbfeff);
-}
-.intro h1{
-  margin:0;
-  font-size:42px;
-  letter-spacing:-1.2px;
-}
-.intro p{
-  margin:6px 0 0;
-  font-size:24px;
-}
-.location,.food,.how{
-  padding:0 48px;
-}
-.location{margin-top:2px}
-.current,.town-toggle{
-  width:100%;
-  display:grid;
-  grid-template-columns:58px 1fr 30px;
-  align-items:center;
-  border:0;
-  border-radius:22px;
-  text-align:left;
-  cursor:pointer;
-}
-.current{
-  background:#159aa3;
-  color:#fff;
-  padding:18px 25px;
-}
-.current b,.current small{display:block}
-.current b{font-size:24px}
-.current small{font-size:18px;margin-top:2px}
-.current i,.town-toggle i{
-  font-style:normal;
-  font-size:42px;
-}
-.loc{
-  font-size:39px;
-  transform:rotate(-45deg);
-}
-.town-toggle{
-  margin-top:9px;
-  background:#e1f3fa;
-  padding:17px 25px;
-}
-.town-toggle b{font-size:21px}
-.pin{font-size:18px}
-.towns{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:9px;
-  padding-top:9px;
-}
-.towns button{
-  border:0;
-  background:#e6f4fa;
-  border-radius:18px;
-  padding:10px 23px;
-  font-size:17px;
-}
-.towns button.sel{
-  background:#cdebf1;
-  font-weight:bold;
-}
-.food{margin-top:24px}
-.food h2,.how h2{
-  margin:0 0 13px;
-  font-size:31px;
-}
-.food-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-.food-grid button{
-  height:111px;
-  border:1px solid var(--line);
-  border-radius:17px;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  box-shadow:0 5px 14px #195b7d17;
-  cursor:pointer;
-  font-size:43px;
-}
-.food-grid b{font-size:19px}
-.food-grid button.sel{outline:2px solid #2aabb0}
-.surprise{
-  display:block;
-  margin:21px auto 0;
-  border:0;
-  border-radius:34px;
-  background:#1769a0;
-  color:#fff;
-  padding:13px 35px;
-  font-size:24px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.how{margin-top:24px}
-.how-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-.how-grid button{
-  height:78px;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:17px;
-  box-shadow:0 5px 14px #195b7d17;
-  font-size:31px;
-  cursor:pointer;
-}
-.how-grid b{font-size:22px}
-.how-grid button.sel{outline:2px solid #d6eef4}
-.find{
-  display:block;
-  width:calc(100% - 96px);
-  height:62px;
-  margin:24px 48px 0;
-  border:0;
-  border-radius:15px;
-  background:var(--navy);
-  color:#fff;
-  font-size:15px;
-  letter-spacing:1.3px;
-  font-weight:bold;
-}
-.msg{
-  text-align:center;
-  min-height:20px;
-  color:var(--teal);
-  padding-top:8px;
-}
-footer{
-  height:210px;
-  margin-top:25px;
-  overflow:hidden;
-  background:#e7f8fd;
-}
-.footer-photo{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center bottom;
+body{margin:0;background:#dfe9ee;color:var(--navy);font-family:Arial,"Trebuchet MS",sans-serif}
+.app{width:min(100%,900px);margin:auto;background:var(--paper);min-height:100vh;overflow:hidden}
+.header{height:160px;background:#eaf8fd;display:grid;grid-template-columns:90px 1fr 90px;align-items:center;padding:8px 24px}
+.menu,.search{border:0;background:none;color:var(--navy);cursor:pointer;font-size:47px}
+.search{font-size:62px}.logo{width:min(500px,100%);height:145px;object-fit:contain;margin:auto}
+.intro{text-align:center;padding:24px 18px 18px;background:linear-gradient(#eaf8fd,#fbfeff)}
+.intro h1{margin:0;font-size:42px;letter-spacing:-1.2px}.intro p{margin:6px 0 0;font-size:24px}
+.location,.food,.how{padding:0 48px}.location{margin-top:2px}
+.current,.town-toggle{width:100%;display:grid;grid-template-columns:58px 1fr 30px;align-items:center;border:0;border-radius:22px;text-align:left;cursor:pointer}
+.current{background:#159aa3;color:#fff;padding:18px 25px}.current b,.current small{display:block}
+.current b{font-size:24px}.current small{font-size:18px;margin-top:2px}
+.current i,.town-toggle i{font-style:normal;font-size:42px}.loc{font-size:39px;transform:rotate(-45deg)}
+.town-toggle{margin-top:9px;background:#e1f3fa;padding:17px 25px}.town-toggle b{font-size:21px}.pin{font-size:18px}
+.towns{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;padding-top:9px}
+.towns button{border:0;background:#e6f4fa;border-radius:18px;padding:10px 23px;font-size:17px}
+.towns button.sel{background:#cdebf1;font-weight:bold}
+.food{margin-top:24px}.food h2,.how h2{margin:0 0 13px;font-size:31px}
+.food-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.food-grid button{height:111px;border:1px solid var(--line);border-radius:17px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 5px 14px #195b7d17;cursor:pointer;font-size:43px}
+.food-grid b{font-size:19px}.food-grid button.sel{outline:2px solid #2aabb0}
+.surprise{display:block;margin:21px auto 0;border:0;border-radius:34px;background:#1769a0;color:#fff;padding:13px 35px;font-size:24px;font-weight:bold;cursor:pointer}
+.how{margin-top:24px}.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.how-grid button{height:78px;border:1px solid var(--line);background:#fff;border-radius:17px;box-shadow:0 5px 14px #195b7d17;font-size:31px;cursor:pointer}
+.how-grid b{font-size:22px}.how-grid button.sel{outline:2px solid #d6eef4}
+.find{display:block;width:calc(100% - 96px);height:62px;margin:24px 48px 0;border:0;border-radius:15px;background:var(--navy);color:#fff;font-size:15px;letter-spacing:1.3px;font-weight:bold;cursor:pointer}
+.msg{text-align:center;min-height:20px;color:var(--teal);padding-top:8px}
+footer{height:210px;margin-top:25px;overflow:hidden;background:#e7f8fd}.footer-photo{width:100%;height:100%;object-fit:cover;object-position:center bottom}
+@media(max-width:650px){
+.header{height:92px;grid-template-columns:42px 1fr 42px;padding:2px 8px}.menu{font-size:32px}.search{font-size:43px}.logo{height:87px;width:100%}
+.intro{padding:14px 12px 11px}.intro h1{font-size:30px}.intro p{font-size:17px;margin-top:5px}
+.location,.food,.how{padding-left:18px;padding-right:18px}.location{margin-top:0}
+.current,.town-toggle{grid-template-columns:42px 1fr 24px;padding:10px 15px;border-radius:15px}
+.current b{font-size:16px}.current small{font-size:12px}.current i,.town-toggle i{font-size:28px}.town-toggle b{font-size:14px}
+.towns{gap:6px}.towns button{font-size:12px;padding:8px 12px}.food-grid{gap:7px}
+.food-grid button{height:77px;border-radius:13px;font-size:28px}.food-grid b{font-size:12px}.food h2,.how h2{font-size:24px}
+.surprise{font-size:18px;padding:10px 26px}.how-grid{gap:8px}.how-grid button{height:60px;font-size:22px}.how-grid b{font-size:15px}
+.find{width:calc(100% - 36px);margin-left:18px;margin-right:18px;height:52px;font-size:11px}
+footer{height:155px}.footer-photo{object-position:center bottom}
 }
 
+.chosen{
+  margin:8px 4px 0;
+  color:var(--teal);
+  font-size:14px;
+  font-weight:bold;
+}
+.recommendation{
+  margin:24px 48px 0;
+  padding:26px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#e9f8fb,#ffffff);
+  border:1px solid var(--line);
+  box-shadow:0 8px 24px #195b7d18;
+}
+.pick-label{
+  color:var(--teal);
+  font-size:14px;
+  font-weight:bold;
+  letter-spacing:1.8px;
+}
+.recommendation h2{
+  margin:7px 0 5px;
+  font-size:34px;
+  letter-spacing:-.7px;
+}
+.pick-meta{
+  color:#4b6878;
+  font-size:16px;
+  font-weight:bold;
+  text-transform:capitalize;
+}
+.recommendation p{
+  margin:15px 0 18px;
+  color:#355565;
+  font-size:17px;
+  line-height:1.45;
+}
+.go{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  background:var(--navy);
+  color:#fff;
+  padding:14px;
+  font-size:15px;
+  font-weight:bold;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+.refine{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+.refine button{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--navy);
+  border-radius:11px;
+  padding:9px 4px;
+  font-weight:bold;
+  cursor:pointer;
+}
 @media(max-width:650px){
-  .header{
-    height:92px;
-    grid-template-columns:42px 1fr 42px;
-    padding:2px 8px;
+  .recommendation{
+    margin:20px 18px 0;
+    padding:20px;
+    border-radius:19px;
   }
-  .menu{font-size:32px}
-  .search{font-size:43px}
-  .logo{
-    height:87px;
-    width:100%;
-  }
-  .intro{
-    padding:14px 12px 11px;
-  }
-  .intro h1{
-    font-size:30px;
-  }
-  .intro p{
-    font-size:17px;
-    margin-top:5px;
-  }
-  .location,.food,.how{
-    padding-left:18px;
-    padding-right:18px;
-  }
-  .location{margin-top:0}
-  .current,.town-toggle{
-    grid-template-columns:42px 1fr 24px;
-    padding:10px 15px;
-    border-radius:15px;
-  }
-  .current b{font-size:16px}
-  .current small{font-size:12px}
-  .current i,.town-toggle i{font-size:28px}
-  .town-toggle b{font-size:14px}
-  .towns{gap:6px}
-  .towns button{
-    font-size:12px;
-    padding:8px 12px;
-  }
-  .food-grid{gap:7px}
-  .food-grid button{
-    height:77px;
-    border-radius:13px;
-    font-size:28px;
-  }
-  .food-grid b{font-size:12px}
-  .food h2,.how h2{font-size:24px}
-  .surprise{
-    font-size:18px;
-    padding:10px 26px;
-  }
-  .how-grid{gap:8px}
-  .how-grid button{
-    height:60px;
-    font-size:22px;
-  }
-  .how-grid b{font-size:15px}
-  .find{
-    width:calc(100% - 36px);
-    margin-left:18px;
-    margin-right:18px;
-    height:52px;
-    font-size:11px;
-  }
-  footer{height:155px}
-  .footer-photo{object-position:center bottom}
+  .recommendation h2{font-size:28px}
+  .recommendation p{font-size:15px}
+  .refine{gap:6px}
+  .refine button{font-size:12px;padding:8px 2px}
 }
