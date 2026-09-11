@@ -13,7 +13,7 @@ body{margin:0;background:#dfe9ee;color:var(--text);font-family:"Trebuchet MS",Ar
 button{font:inherit;color:inherit}
 .app{width:min(100%,900px);margin:0 auto;background:var(--paper);min-height:100vh;overflow:hidden}
 .top{height:155px;background:#eaf8fd;display:grid;grid-template-columns:80px 1fr 80px;align-items:start;padding:10px 28px 0;position:relative}
-.brand{width:min(620px,100%);height:145px;object-fit:cover;object-position:center top;margin:auto}
+.brand{width:min(530px,100%);height:145px;object-fit:contain;object-position:center;margin:auto}
 .nav-icon,.search-icon{border:0;background:none;color:var(--navy);font-size:45px;line-height:1;cursor:pointer;padding:28px 8px}
 .search-icon{font-family:Arial;font-size:57px}
 .hero{position:relative;height:285px;background:#e9f8fc;overflow:hidden}
@@ -55,7 +55,7 @@ footer{position:relative;height:210px;overflow:hidden;background:#e7f8fd;margin-
 .anchor{font-size:31px;line-height:1;margin-bottom:8px}
 @media(max-width:650px){
   .top{height:105px;grid-template-columns:45px 1fr 45px;padding:4px 10px 0}
-  .brand{height:100px}.nav-icon,.search-icon{font-size:32px;padding:17px 3px}.search-icon{font-size:42px}
+  .brand{height:100px;width:100%;object-fit:contain}.nav-icon,.search-icon{font-size:32px;padding:17px 3px}.search-icon{font-size:42px}
   .hero{height:220px}.hero-art{height:140px}.hero-copy{height:120px;padding-top:25px}
   .hero-copy h1{font-size:30px}.hero-copy p{font-size:17px}
   .location,.food,.how{padding-left:18px;padding-right:18px}
