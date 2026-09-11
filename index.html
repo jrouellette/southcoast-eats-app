@@ -1,131 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0d2a4a">
-  <title>SouthCoast Eats</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d2a4a">
+<title>SouthCoast Eats</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-<header class="topbar">
-  <div class="brand">
-    <div class="brand-mark">☀︎</div>
-    <div>
-      <div class="brand-name">SouthCoast <span>Eats</span></div>
-      <div class="tagline">LOCAL PICKS. BETTER MEALS.</div>
-    </div>
-  </div>
+<header class="site-header">
+<button class="icon-button" aria-label="Open menu">☰</button>
+<div class="brand-lockup">
+<svg class="brand-logo" viewBox="0 0 330 105" aria-label="SouthCoast Eats logo">
+<circle cx="47" cy="27" r="15" fill="#f3b84b"/>
+<path d="M27 43c13-13 29-14 43-3 13 10 28 10 44-2" fill="none" stroke="#0d2a4a" stroke-width="8" stroke-linecap="round"/>
+<path d="M22 51c18-12 34-12 49-1 15 11 31 11 49-1" fill="none" stroke="#4f9c91" stroke-width="8" stroke-linecap="round"/>
+<path d="M21 59c18-10 34-10 50 0 15 9 30 9 48-1" fill="none" stroke="#6f9db8" stroke-width="5" stroke-linecap="round"/>
+<text x="76" y="60" font-family="Arial,sans-serif" font-size="34" font-weight="800" fill="#0d2a4a">SouthCoast</text>
+<text x="238" y="62" font-family="cursive" font-size="38" font-style="italic" font-weight="700" fill="#4f9c91">Eats</text>
+<text x="78" y="82" font-family="Arial,sans-serif" font-size="8" font-weight="800" letter-spacing="2.1" fill="#687b89">LOCAL PICKS. BETTER MEALS.</text>
+</svg>
+</div>
+<button class="icon-button" aria-label="Search">⌕</button>
 </header>
 
 <main>
+<section class="hero">
+<div class="hero-art"><div class="sun"></div><div class="wave wave-one"></div><div class="wave wave-two"></div></div>
+<div class="hero-copy">
+<div class="eyebrow">LET'S FIGURE OUT DINNER</div>
+<h1>What sounds good?</h1>
+<p>Find great food around the SouthCoast.</p>
+</div>
 
-  <section class="hero">
-    <div class="eyebrow">LET'S FIGURE OUT DINNER</div>
-    <h1>What sounds good?</h1>
-    <p>We'll do the hard part. Just pick the kind of food you're in the mood for.</p>
+<div class="location-area">
+<button class="location-primary" id="locationButton">
+<span class="location-symbol">➤</span>
+<span class="location-copy"><strong>Use my current location</strong><small>Find what's open near you</small></span>
+<span class="arrow">›</span>
+</button>
+<button class="town-toggle" id="townToggle" aria-expanded="false">
+<span class="pin">●</span><strong>Search near a town instead</strong><span class="arrow">›</span>
+</button>
+<div class="town-picker" id="townPicker" hidden>
+<div class="town-grid">
+<button class="town">Fall River</button><button class="town">New Bedford</button><button class="town">Dartmouth</button>
+<button class="town">Somerset</button><button class="town">Tiverton</button><button class="town">Westport</button>
+<button class="town">Swansea</button><button class="town">Seekonk</button><button class="town">Bristol</button>
+</div>
+</div>
+</div>
+</section>
 
-    <div class="location-card">
-      <div class="location-icon">⌖</div>
-      <div class="location-text">
-        <strong>Use my current location</strong>
-        <span>Best for what's open and close by</span>
-      </div>
-      <button id="locationButton">USE LOCATION</button>
-    </div>
+<section class="food-section">
+<div class="section-label">FOOD FIRST</div>
+<h2>I'm craving<span>...</span></h2>
+<div class="food-grid">
+<button class="food-card">🍕<span>Pizza</span></button>
+<button class="food-card">🍔<span>American</span></button>
+<button class="food-card">🦐<span>Seafood</span></button>
+<button class="food-card">🍝<span>Italian</span></button>
+<button class="food-card">🌮<span>Mexican</span></button>
+<button class="food-card">🥡<span>Asian</span></button>
+<button class="food-card">🍺<span>Pub/Burger</span></button>
+<button class="food-card">🔥<span>BBQ</span></button>
+<button class="food-card">🥞<span>Breakfast</span></button>
+<button class="food-card">☕<span>Coffee & Treats</span></button>
+<button class="food-card">🥗<span>Healthy</span></button>
+<button class="food-card">🍰<span>Dessert</span></button>
+</div>
+<button class="surprise" id="surpriseButton">🎲 &nbsp; Surprise Me</button>
+<div class="selection-note" id="selectionNote"></div>
+</section>
 
-    <button class="search-link">Search near a town instead</button>
-  </section>
+<section class="service-section">
+<div class="section-label">OPTIONAL</div>
+<h2>How do you want it?</h2>
+<div class="service-row">
+<button class="service active">No preference</button><button class="service">Sit down</button>
+<button class="service">Takeout</button><button class="service">Drive-through</button><button class="service">Delivery</button>
+</div>
+</section>
 
-  <section class="food-section">
-
-    <div class="section-label">FOOD FIRST</div>
-    <div class="section-title-row">
-      <h2>Pick your craving</h2>
-      <button class="surprise">✦ Surprise me</button>
-    </div>
-
-    <div class="food-grid">
-
-      <button class="food-card">🍕<span>Pizza</span></button>
-      <button class="food-card">🍗<span>Chicken</span></button>
-      <button class="food-card">🍔<span>Pub / Burger</span></button>
-      <button class="food-card">🌮<span>Mexican</span></button>
-      <button class="food-card">🥡<span>Chinese</span></button>
-      <button class="food-card">🦞<span>Seafood</span></button>
-      <button class="food-card">🍝<span>Italian</span></button>
-      <button class="food-card">🍳<span>Breakfast</span></button>
-      <button class="food-card">☕<span>Coffee & Bakery</span></button>
-      <button class="food-card">🔥<span>BBQ</span></button>
-
-    </div>
-
-  </section>
-
-  <section class="service-section">
-
-    <div class="section-label">OPTIONAL</div>
-    <h2>How do you want it?</h2>
-
-    <div class="service-row">
-      <button class="service active">No preference</button>
-      <button class="service">Sit down</button>
-      <button class="service">Takeout</button>
-      <button class="service">Drive-through</button>
-      <button class="service">Delivery</button>
-    </div>
-
-  </section>
-
-  <section class="pick-section">
-
-    <div class="pick-label">✦ TONIGHT'S PICK ✦</div>
-
-    <div class="pick-card">
-
-      <div class="pick-image">🍽️</div>
-
-      <div class="pick-content">
-
-        <h2>Your best match</h2>
-
-        <p class="pick-meta">
-          Choose a food above to get started
-        </p>
-
-        <div class="reason">
-          <strong>✦ Why this pick?</strong>
-          <p>
-            We'll use your food choice, location, service preference
-            and the current time to make a sensible recommendation.
-          </p>
-        </div>
-
-        <button class="go-button">
-          LET'S GO →
-        </button>
-
-        <div class="alternatives">
-          <button>⌖<small>CLOSER</small></button>
-          <button>$<small>CHEAPER</small></button>
-          <button>↝<small>DIFFERENT</small></button>
-          <button>•••<small>ANOTHER</small></button>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
+<button class="find-button" id="findButton">FIND MY TONIGHT'S PICK <span>→</span></button>
 </main>
 
-<footer>
-  <span>SouthCoast Eats</span>
-  <span>Local picks. Better meals.</span>
+<footer class="coastal-footer">
+<div class="footer-waves"><span></span><span></span><span></span></div>
+<div class="footer-mark">⚓</div>
+<div class="footer-towns">FALL RIVER · NEW BEDFORD · SOMERSET · TIVERTON<br>DARTMOUTH · SEEKONK · SWANSEA · WESTPORT · BRISTOL</div>
 </footer>
 
+<script>
+const toggle=document.getElementById('townToggle'), picker=document.getElementById('townPicker');
+const note=document.getElementById('selectionNote');
+toggle.onclick=()=>{picker.hidden=!picker.hidden;toggle.setAttribute('aria-expanded',String(!picker.hidden));};
+document.querySelectorAll('.town').forEach(t=>t.onclick=()=>{document.querySelectorAll('.town').forEach(x=>x.classList.remove('selected'));t.classList.add('selected');toggle.querySelector('strong').textContent=t.textContent;note.textContent='Looking near '+t.textContent+'.';});
+document.getElementById('locationButton').onclick=()=>note.textContent='Using your current location.';
+const foods=[...document.querySelectorAll('.food-card')];
+foods.forEach(f=>f.onclick=()=>{foods.forEach(x=>x.classList.remove('selected'));f.classList.add('selected');note.textContent=f.innerText+' selected.';});
+document.getElementById('surpriseButton').onclick=()=>foods[Math.floor(Math.random()*foods.length)].click();
+document.querySelectorAll('.service').forEach(s=>s.onclick=()=>{document.querySelectorAll('.service').forEach(x=>x.classList.remove('active'));s.classList.add('active');});
+document.getElementById('findButton').onclick=()=>note.textContent=foods.find(x=>x.classList.contains('selected'))?'Ready to find your pick.':'Pick a craving first — or try Surprise Me.';
+</script>
 </body>
 </html>
