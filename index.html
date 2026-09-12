@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SouthCoast Eats</title>
 <link rel="stylesheet" href="styles.css">
+
+<style id="mobile-cleanup">
+  /* Mobile polish: keep status text inside the viewport. */
+  .msg {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 12px;
+    text-align: center;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+  footer {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+  .footer-photo {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  /* Match the teal selected outline used by the food tiles. */
+  .how-grid button.sel {
+    border-color: #2aa6a6 !important;
+    box-shadow: 0 0 0 2px rgba(42,166,166,.18) !important;
+  }
+</style>
 </head>
 <body>
 <div class="app">
