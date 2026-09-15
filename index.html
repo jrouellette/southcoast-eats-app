@@ -7,7 +7,35 @@
 <link rel="stylesheet" href="styles.css">
 
 <style id="mobile-cleanup">
-  .msg{width:100%;max-width:100%;box-sizing:border-box;padding:0 12px;text-align:center;line-height:1.35;overflow-wrap:anywhere}
+  /* Mobile polish: keep status text inside the viewport. */
+  .msg {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 12px;
+    text-align: center;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+  footer {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+  .footer-photo {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  /* Match the teal selected outline used by the food tiles. */
+  .how-grid button.sel {
+    border-color: #2aa6a6 !important;
+    box-shadow: 0 0 0 2px rgba(42,166,166,.18) !important;
+  }
 </style>
 </head>
 <body>
@@ -28,9 +56,9 @@
   <div class="chosen" id="chosenLocation" hidden></div>
 </section>
 <section class="food"><h2>I’m craving...</h2><div class="food-grid">
-<button type="button" data-food="pizza">🍕<b>Pizza</b></button><button type="button" data-food="portuguese">🇵🇹<b>Portuguese</b></button><button type="button" data-food="chicken">🍗<b>Chicken</b></button><button type="button" data-food="pub">🍔<b>Burgers &amp; Pub</b></button>
-<button type="button" data-food="mexican">🌮<b>Mexican</b></button><button type="button" data-food="italian">🍝<b>Italian</b></button><button type="button" data-food="seafood">🦐<b>Seafood</b></button><button type="button" data-food="bbq">🔥<b>BBQ</b></button>
-<button type="button" data-food="breakfast">🥞<b>Breakfast</b></button><button type="button" data-food="coffee">☕<b>Coffee, Bakery &amp; Treats</b></button><button type="button" data-food="healthy">🥗<b>Healthy</b></button><button type="button" data-food="more">✨<b>More</b></button>
+<button type="button" data-food="pizza">🍕<b>Pizza</b></button><button type="button" data-food="american">🍔<b>American</b></button><button type="button" data-food="seafood">🦐<b>Seafood</b></button><button type="button" data-food="italian">🍝<b>Italian</b></button>
+<button type="button" data-food="mexican">🌮<b>Mexican</b></button><button type="button" data-food="asian">🥡<b>Asian</b></button><button type="button" data-food="pub">🍺<b>Pub/Burger</b></button><button type="button" data-food="bbq">🔥<b>BBQ</b></button>
+<button type="button" data-food="breakfast">🥞<b>Breakfast</b></button><button type="button" data-food="coffee">☕<b>Coffee &amp; Treats</b></button><button type="button" data-food="healthy">🥗<b>Healthy</b></button><button type="button" data-food="dessert">🍰<b>Dessert</b></button>
 </div><button class="surprise" id="surprise" type="button">⚄ &nbsp; Surprise Me</button></section>
 <section class="how"><h2>How do you want it?</h2><div class="how-grid"><button type="button" data-service="takeout">🚗 <b>Pickup</b></button><button type="button" data-service="delivery">🛵 <b>Delivery</b></button><button type="button" data-service="dine_in">🍴 <b>Dine In</b></button></div></section>
 <button class="find" id="find" type="button">FIND MY TONIGHT'S PICK&nbsp; →</button>
@@ -50,7 +78,7 @@ const townCenters={
  "Swansea":[41.7482,-71.1890],"Seekonk":[41.8084,-71.3370],"Little Compton":[41.5100,-71.1710]
 };
 
-function normalizeFood(value){const v=(value||"").toLowerCase().trim();const map={pizza:"pizza",portuguese:"portuguese",chicken:"chicken",american:"american",seafood:"seafood",italian:"italian",mexican:"mexican",asian:"asian",pub:"pub","pub/burger":"pub","burgers & pub":"pub",bbq:"bbq",breakfast:"breakfast",coffee:"coffee","coffee & treats":"coffee","coffee, bakery & treats":"coffee",healthy:"healthy",dessert:"dessert"};return map[v]||v.replace(/[^a-z0-9]+/g,"_");}
+function normalizeFood(value){const v=(value||"").toLowerCase().trim();const map={pizza:"pizza",american:"american",seafood:"seafood",italian:"italian",mexican:"mexican",asian:"asian",pub:"pub","pub/burger":"pub",bbq:"bbq",breakfast:"breakfast",coffee:"coffee","coffee & treats":"coffee",healthy:"healthy",dessert:"dessert"};return map[v]||v.replace(/[^a-z0-9]+/g,"_");}
 function normalizeService(value){const v=(value||"").toLowerCase().trim();if(["pickup","takeout","take-out"].includes(v))return "takeout";if(v==="delivery")return "delivery";if(["dine in","dine-in","dine_in","sit-down","sit down"].includes(v))return "dine_in";return v.replace(/[^a-z0-9]+/g,"_");}
 function distanceMiles(a,b,c,d){const R=3958.7613,rad=Math.PI/180,dLat=(c-a)*rad,dLon=(d-b)*rad,x=Math.sin(dLat/2)**2+Math.cos(a*rad)*Math.cos(c*rad)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
 function nearestTown(lat,lon){let best=null,bestD=Infinity;for(const [town,[tlat,tlon]] of Object.entries(townCenters)){const d=distanceMiles(lat,lon,tlat,tlon);if(d<bestD){bestD=d;best=town;}}return {town:best,distance:bestD};}
@@ -102,22 +130,12 @@ async function loadRestaurants(){
 }
 loadRestaurants();
 
-document.getElementById('current').onclick=()=>{if(!navigator.geolocation){msg.textContent='Location is not available in this browser. Choose a town instead.';return;}document.getElementById('locationStatus').textContent='Getting a fresh GPS location…';msg.textContent='Getting your current location…';navigator.geolocation.getCurrentPosition(pos=>{state.location='current';state.town=null;state.coords={lat:pos.coords.latitude,lon:pos.coords.longitude};state.accuracy=pos.coords.accuracy;document.getElementById('locationStatus').textContent='Location ready';setLocationLabel();msg.textContent=`Using your current GPS location (±${Math.round(state.accuracy)} m).`;},err=>{document.getElementById('locationStatus').textContent='Location permission not available';msg.textContent=err.code===2?'Your device could not determine a current location.':err.code===3?'Location lookup timed out. Please try again.':'Choose a town instead, or allow location access in your browser.';},{enableHighAccuracy:true,maximumAge:0,timeout:15000});};
+document.getElementById('current').onclick=()=>{if(!navigator.geolocation){msg.textContent='Location is not available in this browser. Choose a town instead.';return;}document.getElementById('locationStatus').textContent='Getting a fresh GPS location…';msg.textContent='Getting your current location…';navigator.geolocation.getCurrentPosition(pos=>{state.location='current';state.town=null;state.coords={lat:pos.coords.latitude,lon:pos.coords.longitude};state.accuracy=pos.coords.accuracy;const n=nearestTown(state.coords.lat,state.coords.lon);document.getElementById('locationStatus').textContent=`Location ready • ${n.town}`;setLocationLabel();msg.textContent=`Using GPS near ${n.town} (±${Math.round(state.accuracy)} m).`;},err=>{document.getElementById('locationStatus').textContent='Location permission not available';msg.textContent=err.code===2?'Your device could not determine a current location.':err.code===3?'Location lookup timed out. Please try again.':'Choose a town instead, or allow location access in your browser.';},{enableHighAccuracy:true,maximumAge:0,timeout:15000});};
 
 document.getElementById('townToggle').onclick=()=>{const t=document.getElementById('towns');t.hidden=!t.hidden;};
 document.querySelectorAll('.towns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.towns button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');state.town=b.textContent;state.location='town';state.coords=null;state.accuracy=null;setLocationLabel();msg.textContent='Searching near '+state.town+'.';});
-document.querySelectorAll('.food-grid button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.food-grid button').forEach(x=>x.classList.remove('sel'));
-  b.classList.add('sel');
-  if(b.dataset.food==='more'){
-    state.food=null;
-    msg.textContent='More food choices coming next.';
-    return;
-  }
-  state.food=b.dataset.food;
-  msg.textContent='Looking for '+b.innerText+'…';
-});
-document.getElementById('surprise').onclick=()=>{const a=[...document.querySelectorAll('.food-grid button')].filter(x=>x.dataset.food!=='more');a.forEach(x=>x.classList.remove('sel'));const b=a[Math.floor(Math.random()*a.length)];b.classList.add('sel');state.food=b.dataset.food;msg.textContent='Surprise choice: '+b.innerText+'!';};
+document.querySelectorAll('.food-grid button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.food-grid button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');state.food=b.dataset.food;msg.textContent='Looking for '+b.innerText+'…';});
+document.getElementById('surprise').onclick=()=>{const a=[...document.querySelectorAll('.food-grid button')];a.forEach(x=>x.classList.remove('sel'));const b=a[Math.floor(Math.random()*a.length)];b.classList.add('sel');state.food=b.dataset.food;msg.textContent='Surprise choice: '+b.innerText+'!';};
 document.querySelectorAll('.how-grid button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.how-grid button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');state.service=b.dataset.service;msg.textContent='Service: '+b.innerText+'.';});
 
 function addActualDistances(pool){
@@ -131,9 +149,17 @@ function addActualDistances(pool){
 }
 
 function filterBase(pool){
- if(state.town)pool=pool.filter(r=>r.town.toLowerCase()===state.town.toLowerCase());
- // Current-location mode deliberately does NOT filter by nearest town.
- // GPS distance is applied later so restaurants across town boundaries remain eligible.
+ // A manually selected town is a hard geographic filter.
+ if(state.town){
+  return pool.filter(r=>r.town.toLowerCase()===state.town.toLowerCase());
+ }
+ // For current GPS, stay within the user's detected local town first.
+ // This prevents a geocoded restaurant in another town from winning simply
+ // because local restaurants have not been geocoded yet.
+ if(state.location==='current'&&state.coords){
+  const n=nearestTown(state.coords.lat,state.coords.lon);
+  return pool.filter(r=>r.town.toLowerCase()===n.town.toLowerCase());
+ }
  return pool;
 }
 
