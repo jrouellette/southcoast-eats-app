@@ -2,148 +2,42 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>SouthCoast Eats — PROTOTYPE 3.8</title>
-<style>
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:760px;margin:0 auto;padding:20px;background:#f7f7f7;color:#222}
-h1{margin-bottom:4px}.sub{color:#666;margin-top:0}.card{background:white;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 1px 5px #ddd}
-label{display:block;font-weight:600;margin:14px 0 7px}select,input,button{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccc;border-radius:10px;font-size:16px;background:white}
-button{background:#222;color:white;border:0;font-weight:700;margin-top:16px}.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}.check input{width:auto;margin-top:4px}
-.result{border-top:1px solid #eee;padding:14px 0}.result:first-child{border-top:0}.pill{display:inline-block;background:#eee;border-radius:20px;padding:4px 8px;margin:3px;font-size:12px}
-.muted{color:#666;font-size:14px}.error{background:#fff0f0;color:#a00;padding:12px;border-radius:10px}.empty{padding:20px 0}
-.selected-location{margin:6px 0 12px;font-weight:600;color:#444}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SouthCoast Eats — V2 Consumer Test</title>
 </head>
 <body>
-<h1>SouthCoast Eats</h1><p class="sub"><strong>PROTOTYPE 3.8</strong> — clean baseline</p>
-<div class="card">
-<label for="town">Where are you?</label><select id="town"><option value="">Choose a town</option><option value="Fall River">Fall River</option><option value="Little Compton">Little Compton</option><option value="New Bedford">New Bedford</option><option value="Seekonk">Seekonk</option><option value="Somerset">Somerset</option><option value="Swansea">Swansea</option><option value="Tiverton">Tiverton</option><option value="Westport">Westport</option><option value="Dartmouth">Dartmouth</option></select><div id="townStatus" class="selected-location">Selected location: none</div><button id="loc">Use my location</button>
-
-<label for="distance">How far?</label>
-<select id="distance"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="20" selected>20 minutes</option><option value="30">30 minutes</option><option value="nearby">Nearby</option></select>
-
-<label for="food">What sounds good?</label>
-<select id="food"><option value="">Anything</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Chinese</option><option>Pizza</option><option>Seafood</option><option>Mexican</option><option>Italian</option><option>Chicken</option><option>BBQ</option><option>Bakery</option><option>Donuts</option><option>Coffee</option><option>Ice Cream</option><option>Dessert</option></select>
-
-<label for="when">When?</label>
-<select id="when"><option value="device">Use device time</option><option value="morning">Morning</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="any">Any time</option></select>
-<input id="time" type="time" style="display:none">
-
-<label class="check"><input id="unknown" type="checkbox"> <span>Testing: include restaurants whose current hours still need verification</span></label>
-<button id="find">Find recommendations</button>
-<div id="results"></div>
-</div>
 <script>
-const restaurants = {"version":"3.1-complete","purpose":"Expanded V3 test dataset seed","rules":{"closed_statuses_excluded_from_recommendations":true,"time_of_day_must_be_enforced":true,"current_time_default":"device_now","future_time_override":"optional"},"restaurants":[{"name":"The Cove","categories":["seafood","american","chicken"],"type":["sit-down","takeout"],"status":"active","hours_note":"Sun-Thu kitchen 11:30-21:00; Fri-Sat 11:30-21:30","address":"392 Davol St, Fall River, MA 02720","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sagres Restaurant","categories":["portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Caldeiras Restaurant","categories":["portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"T.A. Restaurant","categories":["portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fall River Grill","categories":["portuguese","american"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Patti's Pierogis","categories":["polish","italian"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Tipsy Toboggan","categories":["american","bar"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Merrill's on the Waterfront","categories":["american","seafood"],"type":["sit-down"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"110 Grill","categories":["american","chicken","seafood","burgers"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Joe's Shish Kabob Lebanese","categories":["lebanese","mediterranean","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Oriental Chow Mein Co.","categories":["chinese"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"New China","categories":["chinese","chicken","seafood"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"China Star","categories":["chinese","chicken","seafood"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ed's Famous BBQ","categories":["bbq","chicken"],"type":["takeout","sit-down"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Gina's Restaurant","categories":["breakfast","american"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sam's Bakery","categories":["bakery","breakfast"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sweet Rose Cafe","categories":["bakery","coffee","breakfast"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Liberal Club","categories":["american","portuguese"],"type":["sit-down"],"status":"transition","note":"Restaurant operation changed; verify new operator before recommendation","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":false,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mee Sum","categories":["chinese"],"type":["takeout"],"status":"closed","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":false,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sun China","categories":["chinese"],"type":["takeout"],"status":"closed","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":false,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Elsie's On The Commons","categories":["breakfast","lunch","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"A-1 Pizza","categories":["pizza","chicken"],"type":["takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Art Cafe","categories":["breakfast","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Chicken Trailer","categories":["chicken","quick-service"],"type":["takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Hostful Table","categories":["food","cafe"],"type":["sit-down"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Boat House Waterfront Dining","categories":["seafood","chicken","steak"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Macray's Seafood","categories":["seafood"],"type":["takeout","sit-down"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Four Corners Grille","categories":["seafood","burgers","chicken","pizza"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"China Sea","categories":["chinese","chicken","seafood"],"type":["takeout","sit-down"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Family Ties","categories":["breakfast","lunch"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":true,"hours":{"mon":null,"tue":["06:00","14:00"],"wed":["06:00","14:00"],"thu":["06:00","14:00"],"fri":["06:00","14:00"],"sat":["06:00","14:00"],"sun":["07:00","13:00"]},"meal_hours":{"breakfast":{"mon":null,"tue":["06:00","13:30"],"wed":["06:00","13:30"],"thu":["06:00","13:30"],"fri":["06:00","13:30"],"sat":["06:00","13:30"],"sun":["07:00","13:00"]}}},{"name":"Sports Kitchen","categories":["breakfast","pizza","burgers","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":true,"hours":{"mon":["16:00","23:00"],"tue":["16:00","23:00"],"wed":["16:00","23:00"],"thu":["16:00","23:00"],"fri":["07:00","23:00"],"sat":["07:00","23:00"],"sun":["07:00","21:00"]},"meal_hours":{"breakfast":{"mon":null,"tue":null,"wed":null,"thu":null,"fri":["07:00","11:00"],"sat":["07:00","11:00"],"sun":["07:00","11:00"]}},"mealPeriods":{"breakfast":{"mon":null,"tue":null,"wed":null,"thu":null,"fri":null,"sat":["07:00","11:00"],"sun":["07:00","11:00"]}}},{"name":"Groundswell Cafe + Bakery","categories":["cafe","bakery","breakfast"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":true,"hours":{"mon":null,"tue":null,"wed":["07:00","16:00"],"thu":["07:00","16:00"],"fri":["07:00","16:00"],"sat":["07:00","16:00"],"sun":["07:00","16:00"]},"meal_hours":{"breakfast":{"mon":null,"tue":null,"wed":["07:00","15:00"],"thu":["07:00","15:00"],"fri":["07:00","15:00"],"sat":["07:00","15:00"],"sun":["07:00","15:00"]}}},{"name":"Classic Pizza","categories":["pizza"],"type":["takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Oriental Pearl","categories":["chinese","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Back Eddy","categories":["seafood","american"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Bayside Restaurant","categories":["seafood","american"],"type":["sit-down"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Portas Da Cidade","categories":["portuguese","seafood","steak"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Bittersweet Farm Restaurant and Tavern","categories":["american","seafood","steak"],"type":["sit-down"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Galley Grille","categories":["seafood","american","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Backyard Westport","categories":["breakfast","burgers","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Lexi-Lu's Place","categories":["breakfast","lunch"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Kathy's Coffee Shop & Creamery","categories":["breakfast","coffee","ice cream"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Wild Honey Cafe","categories":["breakfast","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Til Dusk Cafe and Bakery","categories":["bakery","breakfast","sandwiches"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ten Cousins Brick Oven","categories":["pizza","italian","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Village Pizza and Ice Cream","categories":["pizza","ice cream"],"type":["takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Timo's Pizza","categories":["pizza","italian","middle eastern"],"type":["takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cask & Pig Kitchen and Alehouse","categories":["bbq","burgers","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Hungry Pot Korean BBQ & Hot Pot","categories":["korean","bbq","chicken"],"type":["sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Lebanese Pita Pocket","categories":["lebanese","mediterranean","chicken"],"type":["takeout","sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The 9th Monarch","categories":["thai","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Good Friends Chinese Restaurant","categories":["chinese","chicken"],"type":["takeout","sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mirasol's Cafe - Dartmouth","categories":["breakfast","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"99 Restaurants","categories":["american","chicken","seafood","burgers"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Churrascaria Tropeiro's Grill","categories":["brazilian","steak","chicken"],"type":["sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Somerset Creamery - Route 6","categories":["ice cream","dessert"],"type":["takeout","sit-down"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Somerset Creamery - County Street","categories":["ice cream","dessert"],"type":["takeout","sit-down"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fiesta Mexican Restaurant","categories":["mexican","seafood","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Lina's Place","categories":["breakfast","diner"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Roger's Family Restaurant","categories":["breakfast","seafood","portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Somerset Grille","categories":["breakfast","seafood","portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Agoro's Pizza Bar & Grill","categories":["pizza","burgers","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Comfort Zone Grille & Bar","categories":["chicken","seafood","burgers"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ma Raffa's","categories":["italian","pizza"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Neo-China","categories":["chinese"],"type":["takeout","sit-down"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fiesta Tequila Bar","categories":["mexican","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Black Salt","categories":["seafood","steak","chicken"],"type":["sit-down"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cornerstone Bakery & Restaurant","categories":["breakfast","bakery","portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Ice Cream Barn","categories":["ice cream","dessert"],"type":["takeout","sit-down"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Simcock Farm","categories":["ice cream","dessert"],"type":["takeout"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Applebee's","categories":["american","burgers","chicken","seafood"],"type":["sit-down","takeout","carside"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Newport Creamery","categories":["breakfast","burgers","ice cream"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Hamilton Diner","categories":["breakfast","diner"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Brothers Seafood Restaurant","categories":["seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Triple S Craft BBQ","categories":["bbq","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Popular Pizza","categories":["pizza","seafood","chicken"],"type":["takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Chow Time","categories":["asian","chicken","seafood"],"type":["takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mack's Original Pizza Pub","categories":["burgers","pizza","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Micheletti's Restaurant","categories":["breakfast","seafood","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Old Grist Mill Tavern","categories":["seafood","american","chicken"],"type":["sit-down"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Plaza Mexico","categories":["mexican","seafood","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mizu Asian Bistro","categories":["asian","sushi","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mediterranean Grill & Pizzeria","categories":["mediterranean","pizza","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Master Homemade Donuts","categories":["bakery","donuts","breakfast"],"type":["takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Black Whale","categories":["seafood","steak"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Danny's Seafood","categories":["seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cove 1606 Bar & Grille","categories":["seafood","american"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fathoms Waterfront Bar & Grille","categories":["seafood","american"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Nuno's Restaurant & Lounge","categories":["portuguese","american"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Candela Cucina","categories":["italian","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cisco Kitchen & Bar","categories":["sushi","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Alianca Restaurant","categories":["portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Royal Restaurant Cafe","categories":["portuguese","breakfast"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ming Sushi","categories":["japanese","sushi","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Jade Garden","categories":["chinese"],"type":["takeout","sit-down"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Pa Raffa's Italian Restaurant","categories":["italian","pizza","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Karas Pizza House","categories":["pizza","chicken"],"type":["takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"No Problemo","categories":["mexican","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Tia Maria's European Caf\u00e9","categories":["breakfast","portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Padaria Nova Bakery","categories":["bakery","breakfast"],"type":["takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}}]};
-const townEl=document.querySelector("#town");
-const townStatus=document.querySelector("#townStatus");
-townEl.addEventListener("change",()=>{
-  townStatus.textContent="Selected location: "+(townEl.value||"none");
-});
-document.querySelector("#loc").onclick=()=>{
-  if(!navigator.geolocation){alert("Location isn't available on this device.");return}
-  navigator.geolocation.getCurrentPosition(pos=>{
-    // Keep the user's chosen town if already selected; otherwise use the closest
-    // prototype town by a simple geolocation map when coordinates are available.
-    alert("Location permission granted. For this prototype, keep your town selected so distance testing stays deterministic.");
-  },()=>alert("Location permission was not granted."));
-};
-
-function render(list){
-  const el=document.querySelector("#results");
-  if(!el) return;
-  if(!Array.isArray(list) || list.length===0){
-    el.innerHTML='<div class="empty"><strong>No recommendations found.</strong><br>Try a larger distance, another food choice, or enable the testing hours option.</div>';
-    return;
-  }
-  el.innerHTML="<h2>Recommendations</h2>"+list.map((r,i)=>{
-    const cats=Array.isArray(r.categories)?r.categories.slice(0,5):[];
-    return `<div class="result">
-      <strong>${i+1}. ${String(r.name||"Restaurant")}</strong>
-      <div class="muted">${String(r.town||"")}${r.status==="transition"?" · hours/status need verification":""}</div>
-      <div>${cats.map(c=>`<span class="pill">${String(c)}</span>`).join("")}</div>
-      ${r.address?`<div class="muted">${String(r.address)}</div>`:""}
-    </div>`;
-  }).join("");
-}
-
-document.querySelector("#find").onclick=()=>{
-  const resultsEl=document.querySelector("#results");
+(async()=>{
+  const BASE='https://raw.githubusercontent.com/jrouellette/southcoast-eats-app/37d991a9b1d52a2e7b7b046d05f4feb9ff49e243/index.html';
   try{
-    const food=document.querySelector("#food").value || "";
-    const when=document.querySelector("#when").value || "device";
-    const allowUnknown=document.querySelector("#unknown").checked;
-    const town=townEl.value;
+    const r=await fetch(BASE,{cache:'no-store'});
+    if(!r.ok)throw new Error('Baseline fetch failed: '+r.status);
+    let html=await r.text();
 
-    if(!town){
-      resultsEl.innerHTML='<div class="error">Please choose a town first.</div>';
-      return;
-    }
+    // V2 service-filter baseline fixes. The pinned source is the verified UI that was
+    // tested before the regression; these replacements remove service fallbacks in
+    // recommendation, Surprise Me, and Cheaper refinement paths.
+    html=html.replace(
+      'if(!pool.length&&state.service&&state.service!=="drive_thru"){',
+      'if(!pool.length&&state.service){return null}\n  if(false){'
+    );
+    html=html.replace(
+      'return filterBase(records).some(r=>r.food.includes(normalizeFood(food))&&(!state.service||r.services.includes(normalizeService(state.service))||state.service!=="drive_thru"));',
+      'return filterBase(records).some(r=>r.food.includes(normalizeFood(food))&&(!state.service||r.services.includes(normalizeService(state.service))));'
+    );
+    html=html.replace(
+      '&&(!state.food||r.food.includes(normalizeFood(state.food)))&&(!state.town||r.town.toLowerCase()===state.town.toLowerCase())&&r.price!=null',
+      '&&(!state.food||r.food.includes(normalizeFood(state.food)))&&(!state.service||r.services.includes(normalizeService(state.service)))&&(!state.town||r.town.toLowerCase()===state.town.toLowerCase())&&r.price!=null'
+    );
 
-    const now=new Date();
-    let day=["sun","mon","tue","wed","thu","fri","sat"][now.getDay()];
-    let mins=now.getHours()*60+now.getMinutes();
-
-    if(when==="morning") mins=8*60;
-    if(when==="lunch") mins=12*60;
-    if(when==="dinner") mins=19*60;
-    if(when==="any") mins=null;
-
-    let candidates=(restaurants.restaurants||[]).filter(r=>{
-      if(r.town!==town) return false;
-      if(r.status==="closed") return false;
-      if(r.status!=="active" && !allowUnknown) return false;
-      return true;
-    });
-
-    const wanted=(food||"").toLowerCase();
-
-    candidates=candidates.filter(r=>{
-      const cats=Array.isArray(r.categories)?r.categories.map(x=>String(x).toLowerCase()):[];
-      if(!wanted) return true;
-      if(wanted==="breakfast") return cats.includes("breakfast");
-      if(wanted==="lunch" || wanted==="dinner") return cats.includes(wanted) || cats.length>0;
-      return cats.some(c=>c===wanted || c.includes(wanted) || wanted.includes(c));
-    });
-
-    if(mins!==null){
-      candidates=candidates.filter(r=>{
-        const hours=r.hours && r.hours[day];
-        if(!hours){
-          return allowUnknown;
-        }
-        try{
-          const a=String(hours[0]).split(":").map(Number);
-          const b=String(hours[1]).split(":").map(Number);
-          const open=a[0]*60+a[1], close=b[0]*60+b[1];
-          if(mins<open || mins>close) return false;
-
-          if(wanted==="breakfast"){
-            const bp=r.mealPeriods && r.mealPeriods.breakfast && r.mealPeriods.breakfast[day];
-            if(!bp) return allowUnknown;
-            const ba=String(bp[0]).split(":").map(Number);
-            const bb=String(bp[1]).split(":").map(Number);
-            const bs=ba[0]*60+ba[1], be=bb[0]*60+bb[1];
-            if(mins<bs || mins>be) return false;
-          }
-          return true;
-        }catch(e){
-          return allowUnknown;
-        }
-      });
-    }
-
-    candidates.sort((a,b)=>{
-      const ac=Array.isArray(a.categories)?a.categories.map(x=>String(x).toLowerCase()):[];
-      const bc=Array.isArray(b.categories)?b.categories.map(x=>String(x).toLowerCase()):[];
-      const am=wanted && ac.includes(wanted)?30:0;
-      const bm=wanted && bc.includes(wanted)?30:0;
-      return bm-am;
-    });
-
-    render(candidates.slice(0,10));
+    document.open();
+    document.write(html);
+    document.close();
   }catch(e){
+    document.body.innerHTML='<p style="font-family:Arial;padding:24px;color:#0b315d">SouthCoast Eats could not load the pinned V2 UI baseline. Please check the network connection and try again.</p>';
     console.error(e);
-    resultsEl.innerHTML='<div class="error"><strong>Test error:</strong> '+String(e.message||e)+'</div>';
   }
-};</script>
-</body></html>
+})();
+</script>
+</body>
+</html>
