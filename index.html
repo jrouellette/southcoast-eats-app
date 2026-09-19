@@ -201,7 +201,7 @@ function choose(excluded=[]){
  if(state.location==="current"&&state.coords)for(const r of pool)r.distance=r.latitude!=null&&r.longitude!=null?distanceMiles(state.coords.lat,state.coords.lon,r.latitude,r.longitude):null;
  if(state.food)pool=pool.filter(r=>r.food.includes(normalizeFood(state.food)));
  if(state.service)pool=pool.filter(r=>r.services.includes(normalizeService(state.service)));
- if(!pool.length&&state.service){
+ if(!pool.length&&state.service&&state.service!=="drive_thru"){
   pool=filterBase(records.filter(r=>!excluded.includes(r.id)));
   if(state.food)pool=pool.filter(r=>r.food.includes(normalizeFood(state.food)));
  }
