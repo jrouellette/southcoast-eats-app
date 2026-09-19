@@ -184,7 +184,15 @@ document.querySelectorAll(".food-grid button").forEach(b=>b.onclick=()=>{
  document.querySelectorAll(".food-grid button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");state.food=b.dataset.food;msg.textContent="Looking for "+b.innerText+"…";
 });
 document.getElementById("surprise").onclick=()=>{
- const a=[...document.querySelectorAll(".food-grid button")];a.forEach(x=>x.classList.remove("sel"));const b=a[Math.floor(Math.random()*a.length)];
+ if(!dataReady){msg.textContent="The V2 restaurant database is still loading. Please try again in a moment.";return;}
+ const buttons=[...document.querySelectorAll(".food-grid button")];
+ const candidates=buttons.filter(b=>{
+  const food=b.dataset.food;
+  return filterBase(records).some(r=>r.food.includes(normalizeFood(food))&&(!state.service||r.services.includes(normalizeService(state.service))||state.service!=="drive_thru"));
+ });
+ buttons.forEach(x=>x.classList.remove("sel"));
+ if(!candidates.length){msg.textContent="I couldn't find an available food choice here yet. Try another town or service.";return;}
+ const b=candidates[Math.floor(Math.random()*candidates.length)];
  b.classList.add("sel");state.food=b.dataset.food;msg.textContent="Surprise choice: "+b.innerText+"!";
 };
 document.querySelectorAll(".how-grid button").forEach(b=>b.onclick=()=>{
