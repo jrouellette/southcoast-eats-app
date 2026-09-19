@@ -2,252 +2,148 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SouthCoast Eats — V2 Consumer Test</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SouthCoast Eats — PROTOTYPE 3.8</title>
 <style>
-:root{--navy:#0b315d;--teal:#1599a2;--sky:#e8f7fc;--paper:#fbfeff;--line:#dcebf2}
-*{box-sizing:border-box}body{margin:0;background:#dfe9ee;color:var(--navy);font-family:Arial,"Trebuchet MS",sans-serif}
-.app{width:min(100%,900px);margin:auto;background:var(--paper);min-height:100vh;overflow:hidden}
-.header{height:160px;background:#eaf8fd;display:grid;grid-template-columns:90px 1fr 90px;align-items:center;padding:8px 24px}
-.menu,.search{border:0;background:none;color:var(--navy);cursor:pointer;font-size:47px}.search{font-size:62px}
-.logo{width:min(500px,100%);height:145px;object-fit:contain;margin:auto}
-.intro{text-align:center;padding:24px 18px 18px;background:linear-gradient(#eaf8fd,#fbfeff)}
-.intro h1{margin:0;font-size:42px;letter-spacing:-1.2px}.intro p{margin:6px 0 0;font-size:24px}
-.location,.food,.how{padding:0 48px}.location{margin-top:2px}
-.current,.town-toggle{width:100%;display:grid;grid-template-columns:58px 1fr 30px;align-items:center;border:0;border-radius:22px;text-align:left;cursor:pointer}
-.current{background:#159aa3;color:#fff;padding:18px 25px}.current b,.current small{display:block}.current b{font-size:24px}.current small{font-size:18px;margin-top:2px}
-.current i,.town-toggle i{font-style:normal;font-size:42px}.loc{font-size:39px;transform:rotate(-45deg)}
-.town-toggle{margin-top:9px;background:#e1f3fa;padding:17px 25px}.town-toggle b{font-size:21px}.pin{font-size:18px}
-.towns{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;padding-top:9px}.towns button{border:0;background:#e6f4fa;border-radius:18px;padding:10px 23px;font-size:17px}
-.towns button.sel{background:#cdebf1;font-weight:bold}
-.chosen{margin:8px 4px 0;color:var(--teal);font-size:14px;font-weight:bold}
-.food{margin-top:24px}.food h2,.how h2{margin:0 0 13px;font-size:31px}
-.food-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.food-grid button{height:111px;border:1px solid var(--line);border-radius:17px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 5px 14px #195b7d17;cursor:pointer;font-size:43px}
-.food-grid b{font-size:19px}.food-grid button.sel{outline:2px solid #2aabb0}
-.surprise{display:block;margin:21px auto 0;border:0;border-radius:34px;background:#1769a0;color:#fff;padding:13px 35px;font-size:24px;font-weight:bold;cursor:pointer}
-.how{margin-top:24px}.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.how-grid button{height:78px;border:1px solid var(--line);background:#fff;border-radius:17px;box-shadow:0 5px 14px #195b7d17;font-size:28px;cursor:pointer}
-.how-grid b{font-size:18px}.how-grid button.sel{border-color:#2aa6a6;box-shadow:0 0 0 2px rgba(42,166,166,.18)}
-.find{display:block;width:calc(100% - 96px);height:62px;margin:24px 48px 0;border:0;border-radius:15px;background:var(--navy);color:#fff;font-size:15px;letter-spacing:1.3px;font-weight:bold;cursor:pointer}
-.msg{width:100%;max-width:100%;padding:8px 12px 0;text-align:center;line-height:1.35;overflow-wrap:anywhere;color:var(--teal);min-height:28px}
-.recommendation{margin:18px 48px 0;padding:26px;border-radius:24px;background:linear-gradient(145deg,#e9f8fb,#fff);border:1px solid var(--line);box-shadow:0 8px 24px #195b7d18}
-.pick-label{color:var(--teal);font-size:14px;font-weight:bold;letter-spacing:1.8px}.recommendation h2{margin:7px 0 5px;font-size:34px}
-.pick-meta{color:#4b6878;font-size:16px;font-weight:bold;text-transform:capitalize}.recommendation p{margin:15px 0 18px;color:#355565;font-size:17px;line-height:1.45}
-.go{width:100%;border:0;border-radius:14px;background:var(--navy);color:#fff;padding:14px;font-size:15px;font-weight:bold;letter-spacing:1px;cursor:pointer}
-.refine{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.refine button{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:11px;padding:9px 4px;font-weight:bold;cursor:pointer}
-footer{height:210px;margin-top:25px;overflow:hidden;background:#e7f8fd}.footer-photo{width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block}
-@media(max-width:650px){
-.header{height:78px;grid-template-columns:38px 1fr 38px;padding:1px 7px}.menu{font-size:30px}.search{font-size:40px}.logo{height:74px}
-.intro{padding:10px 12px 8px}.intro h1{font-size:29px}.intro p{font-size:16px;margin-top:3px}
-.location,.food,.how{padding-left:18px;padding-right:18px}.current,.town-toggle{grid-template-columns:38px 1fr 22px;padding:8px 13px;border-radius:14px}
-.current b{font-size:15px}.current small{font-size:11px}.current i,.town-toggle i{font-size:26px}.town-toggle b{font-size:13px}
-.towns{gap:6px}.towns button{font-size:12px;padding:8px 12px}.food{margin-top:15px}.food h2,.how h2{font-size:23px;margin-bottom:9px}
-.food-grid{gap:6px}.food-grid button{height:70px;border-radius:12px;font-size:25px}.food-grid b{font-size:10.5px;line-height:1.05;text-align:center}
-.surprise{font-size:17px;padding:8px 24px;margin-top:10px}.how{margin-top:14px}.how-grid{gap:6px}.how-grid button{height:55px;font-size:19px}.how-grid b{font-size:11px}
-.find{width:calc(100% - 36px);margin-left:18px;margin-right:18px;height:49px;margin-top:15px;font-size:11px}.msg{min-height:18px;padding-top:5px}
-.recommendation{margin:20px 18px 0;padding:20px;border-radius:19px}.recommendation h2{font-size:28px}.recommendation p{font-size:15px}
-footer{height:145px;margin-top:14px}
-}
-</style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:760px;margin:0 auto;padding:20px;background:#f7f7f7;color:#222}
+h1{margin-bottom:4px}.sub{color:#666;margin-top:0}.card{background:white;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 1px 5px #ddd}
+label{display:block;font-weight:600;margin:14px 0 7px}select,input,button{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccc;border-radius:10px;font-size:16px;background:white}
+button{background:#222;color:white;border:0;font-weight:700;margin-top:16px}.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}.check input{width:auto;margin-top:4px}
+.result{border-top:1px solid #eee;padding:14px 0}.result:first-child{border-top:0}.pill{display:inline-block;background:#eee;border-radius:20px;padding:4px 8px;margin:3px;font-size:12px}
+.muted{color:#666;font-size:14px}.error{background:#fff0f0;color:#a00;padding:12px;border-radius:10px}.empty{padding:20px 0}
+.selected-location{margin:6px 0 12px;font-weight:600;color:#444}</style>
 </head>
 <body>
-<div class="app">
-<header class="header">
-<button class="menu" aria-label="Menu">☰</button>
-<img src="https://raw.githubusercontent.com/jrouellette/southcoast-eats-app/main/brand-logo.jpg" alt="SouthCoast Eats — Local Picks. Better Meals." class="logo">
-<button class="search" aria-label="Search">⌕</button>
-</header>
-<section class="intro"><h1>What sounds good?</h1><p>Find great food around the SouthCoast.</p></section>
-<main>
-<section class="location">
-<button class="current" id="current" type="button"><span class="loc">➤</span><span><b>Use my current location</b><small id="locationStatus">Find what's open near you</small></span><i>›</i></button>
-<button class="town-toggle" id="townToggle" type="button"><span class="pin">●</span><b>Search near a town instead</b><i>›</i></button>
-<div class="towns" id="towns" hidden>
-<button type="button">Fall River</button><button type="button">New Bedford</button><button type="button">Dartmouth</button><button type="button">Somerset</button><button type="button">Tiverton</button><button type="button">Westport</button><button type="button">Swansea</button><button type="button">Seekonk</button><button type="button">Bristol</button>
-</div><div class="chosen" id="chosenLocation" hidden></div>
-</section>
-<section class="food"><h2>I'm craving...</h2><div class="food-grid">
-<button type="button" data-food="pizza">🍕<b>Pizza</b></button>
-<button type="button" data-food="portuguese">🇵🇹<b>Portuguese</b></button>
-<button type="button" data-food="seafood">🦐<b>Seafood</b></button>
-<button type="button" data-food="italian">🍝<b>Italian</b></button>
-<button type="button" data-food="mexican">🌮<b>Mexican</b></button>
-<button type="button" data-food="asian">🥡<b>Asian</b></button>
-<button type="button" data-food="pub">🍺<b>Pub/Burger</b></button>
-<button type="button" data-food="bbq">🔥<b>BBQ</b></button>
-<button type="button" data-food="breakfast">🥞<b>Breakfast</b></button>
-<button type="button" data-food="coffee">☕<b>Coffee &amp; Treats</b></button>
-<button type="button" data-food="healthy">🥗<b>Healthy</b></button>
-<button type="button" data-food="dessert">🍰<b>Dessert</b></button>
-</div><button class="surprise" id="surprise" type="button">⚄ &nbsp; Surprise Me</button></section>
-<section class="how"><h2>How do you want it?</h2><div class="how-grid">
-<button type="button" data-service="takeout">🚗 <b>Pickup</b></button>
-<button type="button" data-service="delivery">🛵 <b>Delivery</b></button>
-<button type="button" data-service="dine_in">🍴 <b>Dine In</b></button>
-<button type="button" data-service="drive_thru">🚙 <b>Drive-Thru</b></button>
-</div></section>
-<button class="find" id="find" type="button">FIND MY TONIGHT'S PICK&nbsp; →</button>
-<div class="msg" id="msg" aria-live="polite"></div>
-<section class="recommendation" id="recommendation" hidden>
-<div class="pick-label">TONIGHT'S PICK</div><h2 id="pickName"></h2><div class="pick-meta" id="pickMeta"></div><p id="pickReason"></p>
-<button class="go" id="go" type="button">LET'S GO&nbsp; →</button>
-<div class="refine"><button type="button" data-refine="closer">Closer</button><button type="button" data-refine="cheaper">Cheaper</button><button type="button" data-refine="different">Different</button><button type="button" data-refine="another">Another</button></div>
-</section>
-</main>
-<footer><img src="https://raw.githubusercontent.com/jrouellette/southcoast-eats-app/main/coastal-footer.jpg" alt="" class="footer-photo"></footer>
+<h1>SouthCoast Eats</h1><p class="sub"><strong>PROTOTYPE 3.8</strong> — clean baseline</p>
+<div class="card">
+<label for="town">Where are you?</label><select id="town"><option value="">Choose a town</option><option value="Fall River">Fall River</option><option value="Little Compton">Little Compton</option><option value="New Bedford">New Bedford</option><option value="Seekonk">Seekonk</option><option value="Somerset">Somerset</option><option value="Swansea">Swansea</option><option value="Tiverton">Tiverton</option><option value="Westport">Westport</option><option value="Dartmouth">Dartmouth</option></select><div id="townStatus" class="selected-location">Selected location: none</div><button id="loc">Use my location</button>
+
+<label for="distance">How far?</label>
+<select id="distance"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="20" selected>20 minutes</option><option value="30">30 minutes</option><option value="nearby">Nearby</option></select>
+
+<label for="food">What sounds good?</label>
+<select id="food"><option value="">Anything</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Chinese</option><option>Pizza</option><option>Seafood</option><option>Mexican</option><option>Italian</option><option>Chicken</option><option>BBQ</option><option>Bakery</option><option>Donuts</option><option>Coffee</option><option>Ice Cream</option><option>Dessert</option></select>
+
+<label for="when">When?</label>
+<select id="when"><option value="device">Use device time</option><option value="morning">Morning</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="any">Any time</option></select>
+<input id="time" type="time" style="display:none">
+
+<label class="check"><input id="unknown" type="checkbox"> <span>Testing: include restaurants whose current hours still need verification</span></label>
+<button id="find">Find recommendations</button>
+<div id="results"></div>
 </div>
 <script>
-const state={location:null,town:null,coords:null,accuracy:null,food:null,service:null,lastPick:null,excluded:[]};
-const msg=document.getElementById('msg'),chosen=document.getElementById('chosenLocation'),recommendation=document.getElementById('recommendation');
-const SUPABASE_URL="https://wyqbqaljjnoqypynosur.supabase.co",SUPABASE_KEY="sb_publishable_mpZ-ZFi_MuLQYcZZh1dnHw_BQo3GGaV";
-let records=[],dataReady=false;
-
-const townCenters={
-"Fall River":[41.7015,-71.1550],"New Bedford":[41.6362,-70.9342],"Dartmouth":[41.6140,-70.9700],
-"Somerset":[41.7690,-71.1287],"Tiverton":[41.6259,-71.2139],"Westport":[41.6626,-71.0100],
-"Swansea":[41.7482,-71.1890],"Seekonk":[41.8084,-71.3370],"Bristol":[41.6710,-71.2828],"Little Compton":[41.5100,-71.1710]
+const restaurants = {"version":"3.1-complete","purpose":"Expanded V3 test dataset seed","rules":{"closed_statuses_excluded_from_recommendations":true,"time_of_day_must_be_enforced":true,"current_time_default":"device_now","future_time_override":"optional"},"restaurants":[{"name":"The Cove","categories":["seafood","american","chicken"],"type":["sit-down","takeout"],"status":"active","hours_note":"Sun-Thu kitchen 11:30-21:00; Fri-Sat 11:30-21:30","address":"392 Davol St, Fall River, MA 02720","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sagres Restaurant","categories":["portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Caldeiras Restaurant","categories":["portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"T.A. Restaurant","categories":["portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fall River Grill","categories":["portuguese","american"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Patti's Pierogis","categories":["polish","italian"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Tipsy Toboggan","categories":["american","bar"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Merrill's on the Waterfront","categories":["american","seafood"],"type":["sit-down"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"110 Grill","categories":["american","chicken","seafood","burgers"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Joe's Shish Kabob Lebanese","categories":["lebanese","mediterranean","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Oriental Chow Mein Co.","categories":["chinese"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"New China","categories":["chinese","chicken","seafood"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"China Star","categories":["chinese","chicken","seafood"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ed's Famous BBQ","categories":["bbq","chicken"],"type":["takeout","sit-down"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Gina's Restaurant","categories":["breakfast","american"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sam's Bakery","categories":["bakery","breakfast"],"type":["takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sweet Rose Cafe","categories":["bakery","coffee","breakfast"],"type":["sit-down","takeout"],"status":"active","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Liberal Club","categories":["american","portuguese"],"type":["sit-down"],"status":"transition","note":"Restaurant operation changed; verify new operator before recommendation","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":false,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mee Sum","categories":["chinese"],"type":["takeout"],"status":"closed","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":false,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Sun China","categories":["chinese"],"type":["takeout"],"status":"closed","town_key":"Fall River","town_coords":[41.701,-71.155],"recommendable":false,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Elsie's On The Commons","categories":["breakfast","lunch","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"A-1 Pizza","categories":["pizza","chicken"],"type":["takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Art Cafe","categories":["breakfast","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Chicken Trailer","categories":["chicken","quick-service"],"type":["takeout"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Hostful Table","categories":["food","cafe"],"type":["sit-down"],"status":"active","town_key":"Little Compton","town_coords":[41.51,-71.171],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Boat House Waterfront Dining","categories":["seafood","chicken","steak"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Macray's Seafood","categories":["seafood"],"type":["takeout","sit-down"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Four Corners Grille","categories":["seafood","burgers","chicken","pizza"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"China Sea","categories":["chinese","chicken","seafood"],"type":["takeout","sit-down"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Family Ties","categories":["breakfast","lunch"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":true,"hours":{"mon":null,"tue":["06:00","14:00"],"wed":["06:00","14:00"],"thu":["06:00","14:00"],"fri":["06:00","14:00"],"sat":["06:00","14:00"],"sun":["07:00","13:00"]},"meal_hours":{"breakfast":{"mon":null,"tue":["06:00","13:30"],"wed":["06:00","13:30"],"thu":["06:00","13:30"],"fri":["06:00","13:30"],"sat":["06:00","13:30"],"sun":["07:00","13:00"]}}},{"name":"Sports Kitchen","categories":["breakfast","pizza","burgers","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":true,"hours":{"mon":["16:00","23:00"],"tue":["16:00","23:00"],"wed":["16:00","23:00"],"thu":["16:00","23:00"],"fri":["07:00","23:00"],"sat":["07:00","23:00"],"sun":["07:00","21:00"]},"meal_hours":{"breakfast":{"mon":null,"tue":null,"wed":null,"thu":null,"fri":["07:00","11:00"],"sat":["07:00","11:00"],"sun":["07:00","11:00"]}},"mealPeriods":{"breakfast":{"mon":null,"tue":null,"wed":null,"thu":null,"fri":null,"sat":["07:00","11:00"],"sun":["07:00","11:00"]}}},{"name":"Groundswell Cafe + Bakery","categories":["cafe","bakery","breakfast"],"type":["sit-down","takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":true,"hours":{"mon":null,"tue":null,"wed":["07:00","16:00"],"thu":["07:00","16:00"],"fri":["07:00","16:00"],"sat":["07:00","16:00"],"sun":["07:00","16:00"]},"meal_hours":{"breakfast":{"mon":null,"tue":null,"wed":["07:00","15:00"],"thu":["07:00","15:00"],"fri":["07:00","15:00"],"sat":["07:00","15:00"],"sun":["07:00","15:00"]}}},{"name":"Classic Pizza","categories":["pizza"],"type":["takeout"],"status":"active","town_key":"Tiverton","town_coords":[41.625,-71.213],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Oriental Pearl","categories":["chinese","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Back Eddy","categories":["seafood","american"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Bayside Restaurant","categories":["seafood","american"],"type":["sit-down"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Portas Da Cidade","categories":["portuguese","seafood","steak"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Bittersweet Farm Restaurant and Tavern","categories":["american","seafood","steak"],"type":["sit-down"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Galley Grille","categories":["seafood","american","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Backyard Westport","categories":["breakfast","burgers","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Lexi-Lu's Place","categories":["breakfast","lunch"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Kathy's Coffee Shop & Creamery","categories":["breakfast","coffee","ice cream"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Wild Honey Cafe","categories":["breakfast","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Til Dusk Cafe and Bakery","categories":["bakery","breakfast","sandwiches"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ten Cousins Brick Oven","categories":["pizza","italian","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Village Pizza and Ice Cream","categories":["pizza","ice cream"],"type":["takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Timo's Pizza","categories":["pizza","italian","middle eastern"],"type":["takeout"],"status":"active","town_key":"Westport","town_coords":[41.662,-71.066],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cask & Pig Kitchen and Alehouse","categories":["bbq","burgers","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Hungry Pot Korean BBQ & Hot Pot","categories":["korean","bbq","chicken"],"type":["sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Lebanese Pita Pocket","categories":["lebanese","mediterranean","chicken"],"type":["takeout","sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The 9th Monarch","categories":["thai","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Good Friends Chinese Restaurant","categories":["chinese","chicken"],"type":["takeout","sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mirasol's Cafe - Dartmouth","categories":["breakfast","cafe","bakery"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"99 Restaurants","categories":["american","chicken","seafood","burgers"],"type":["sit-down","takeout"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Churrascaria Tropeiro's Grill","categories":["brazilian","steak","chicken"],"type":["sit-down"],"status":"active","town_key":"Dartmouth","town_coords":[41.612,-70.97],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Somerset Creamery - Route 6","categories":["ice cream","dessert"],"type":["takeout","sit-down"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Somerset Creamery - County Street","categories":["ice cream","dessert"],"type":["takeout","sit-down"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fiesta Mexican Restaurant","categories":["mexican","seafood","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Lina's Place","categories":["breakfast","diner"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Roger's Family Restaurant","categories":["breakfast","seafood","portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Somerset Grille","categories":["breakfast","seafood","portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Agoro's Pizza Bar & Grill","categories":["pizza","burgers","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Comfort Zone Grille & Bar","categories":["chicken","seafood","burgers"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ma Raffa's","categories":["italian","pizza"],"type":["sit-down","takeout"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Neo-China","categories":["chinese"],"type":["takeout","sit-down"],"status":"active","town_key":"Somerset","town_coords":[41.77,-71.128],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fiesta Tequila Bar","categories":["mexican","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Black Salt","categories":["seafood","steak","chicken"],"type":["sit-down"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cornerstone Bakery & Restaurant","categories":["breakfast","bakery","portuguese"],"type":["sit-down","takeout"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Ice Cream Barn","categories":["ice cream","dessert"],"type":["takeout","sit-down"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Simcock Farm","categories":["ice cream","dessert"],"type":["takeout"],"status":"active","town_key":"Swansea","town_coords":[41.748,-71.19],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Applebee's","categories":["american","burgers","chicken","seafood"],"type":["sit-down","takeout","carside"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Newport Creamery","categories":["breakfast","burgers","ice cream"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Hamilton Diner","categories":["breakfast","diner"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Brothers Seafood Restaurant","categories":["seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Triple S Craft BBQ","categories":["bbq","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Popular Pizza","categories":["pizza","seafood","chicken"],"type":["takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Chow Time","categories":["asian","chicken","seafood"],"type":["takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mack's Original Pizza Pub","categories":["burgers","pizza","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Micheletti's Restaurant","categories":["breakfast","seafood","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Old Grist Mill Tavern","categories":["seafood","american","chicken"],"type":["sit-down"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Plaza Mexico","categories":["mexican","seafood","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mizu Asian Bistro","categories":["asian","sushi","chicken","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Mediterranean Grill & Pizzeria","categories":["mediterranean","pizza","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Master Homemade Donuts","categories":["bakery","donuts","breakfast"],"type":["takeout"],"status":"active","town_key":"Seekonk","town_coords":[41.808,-71.337],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"The Black Whale","categories":["seafood","steak"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Danny's Seafood","categories":["seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cove 1606 Bar & Grille","categories":["seafood","american"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Fathoms Waterfront Bar & Grille","categories":["seafood","american"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Nuno's Restaurant & Lounge","categories":["portuguese","american"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Candela Cucina","categories":["italian","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Cisco Kitchen & Bar","categories":["sushi","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Alianca Restaurant","categories":["portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Royal Restaurant Cafe","categories":["portuguese","breakfast"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Ming Sushi","categories":["japanese","sushi","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Jade Garden","categories":["chinese"],"type":["takeout","sit-down"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Pa Raffa's Italian Restaurant","categories":["italian","pizza","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Karas Pizza House","categories":["pizza","chicken"],"type":["takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"No Problemo","categories":["mexican","chicken"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Tia Maria's European Caf\u00e9","categories":["breakfast","portuguese","seafood"],"type":["sit-down","takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}},{"name":"Padaria Nova Bakery","categories":["bakery","breakfast"],"type":["takeout"],"status":"active","town_key":"New Bedford","town_coords":[41.636,-70.934],"recommendable":true,"hours_verified":false,"hours":{},"meal_hours":{}}]};
+const townEl=document.querySelector("#town");
+const townStatus=document.querySelector("#townStatus");
+townEl.addEventListener("change",()=>{
+  townStatus.textContent="Selected location: "+(townEl.value||"none");
+});
+document.querySelector("#loc").onclick=()=>{
+  if(!navigator.geolocation){alert("Location isn't available on this device.");return}
+  navigator.geolocation.getCurrentPosition(pos=>{
+    // Keep the user's chosen town if already selected; otherwise use the closest
+    // prototype town by a simple geolocation map when coordinates are available.
+    alert("Location permission granted. For this prototype, keep your town selected so distance testing stays deterministic.");
+  },()=>alert("Location permission was not granted."));
 };
 
-function normalizeFood(value){
- const v=(value||"").toLowerCase().trim();
- const asianCuisines=["asian","chinese","korean","thai","japanese","vietnamese","indonesian","filipino","pan-asian","pan asian"];
- const map={pizza:"pizza",portuguese:"portuguese",american:"american",seafood:"seafood",italian:"italian",mexican:"mexican",
- pub:"pub","pub/burger":"pub",bbq:"bbq",breakfast:"breakfast",coffee:"coffee","coffee & treats":"coffee",cafe:"coffee",bakery:"coffee",
- "coffee shop":"coffee",healthy:"healthy",dessert:"dessert"};
- if(asianCuisines.includes(v))return "asian";
- return map[v]||v.replace(/[^a-z0-9]+/g,"_");
-}
-function normalizeService(value){
- const v=(value||"").toLowerCase().trim();
- if(["pickup","takeout","take-out"].includes(v))return "takeout";
- if(v==="delivery")return "delivery";
- if(["dine in","dine-in","dine_in","sit-down","sit down"].includes(v))return "dine_in";
- if(["drive-thru","drive thru","drive_thru","drive-through","drive through","drivein","drive-in"].includes(v))return "drive_thru";
- return v.replace(/[^a-z0-9]+/g,"_");
-}
-function distanceMiles(a,b,c,d){const R=3958.7613,rad=Math.PI/180,dLat=(c-a)*rad,dLon=(d-b)*rad,x=Math.sin(dLat/2)**2+Math.cos(a*rad)*Math.cos(c*rad)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
-function nearestTown(lat,lon){let best=null,bestD=Infinity;for(const [town,[tlat,tlon]] of Object.entries(townCenters)){const d=distanceMiles(lat,lon,tlat,tlon);if(d<bestD){bestD=d;best=town;}}return{town:best,distance:bestD};}
-function setLocationLabel(){
- if(state.town){chosen.hidden=false;chosen.textContent='📍 Searching near '+state.town;return;}
- if(state.location==='current'){chosen.hidden=false;const n=state.coords?nearestTown(state.coords.lat,state.coords.lon):null;chosen.textContent='📍 Current location • '+(n?n.town:'GPS location')+(state.accuracy?` • ±${Math.round(state.accuracy)} m`:"");return;}
- chosen.hidden=true;
-}
-
-async function loadRestaurants(){
- try{
-  const fields=["restaurant_id","restaurant_key","restaurant_name","slug","address_line_1","address_line_2","city","state","postal_code","latitude","longitude","phone","website_url","primary_food_type","food_types","service_types","meal_types","audience_types","features","price_level","is_delivery_available","is_takeout_available","is_pickup_available","is_dine_in_available","is_drive_through_available","regular_hours","meal_period_hours","hours_status","last_verified_at","updated_at"].join(",");
-  const headers={apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`};
-  const r=await fetch(`${SUPABASE_URL}/rest/v1/consumer_restaurants_v2?select=${encodeURIComponent(fields)}&order=restaurant_name.asc`,{headers});
-  if(!r.ok)throw new Error(`Consumer view load failed (${r.status})`);
-  const rows=await r.json();
-  records=rows.map(x=>{
-   const foods=Array.isArray(x.food_types)?[...x.food_types]:[];if(x.primary_food_type)foods.push(x.primary_food_type);
-   const services=Array.isArray(x.service_types)?[...x.service_types]:[];
-   if(x.is_delivery_available===true)services.push("delivery");
-   if(x.is_takeout_available===true||x.is_pickup_available===true)services.push("takeout");
-   if(x.is_dine_in_available===true)services.push("dine_in");
-   if(x.is_drive_through_available===true)services.push("drive_thru");
-   return{id:x.restaurant_id,key:x.restaurant_key,name:x.restaurant_name,town:(x.city||"").replace(/\b\w/g,c=>c.toUpperCase()),
-    food:[...new Set(foods.map(normalizeFood).filter(Boolean))],
-    services:[...new Set(services.map(normalizeService).filter(Boolean))],
-    quality:5,deal:0,price:x.price_level||null,latitude:x.latitude!=null?Number(x.latitude):null,longitude:x.longitude!=null?Number(x.longitude):null,
-    address:[x.address_line_1,x.address_line_2,x.city,x.state,x.postal_code].filter(Boolean).join(", ")||null,phone:x.phone||null,website:x.website_url||null,
-    mealTypes:Array.isArray(x.meal_types)?x.meal_types:[],audienceTypes:Array.isArray(x.audience_types)?x.audience_types:[],features:Array.isArray(x.features)?x.features:[],
-    regularHours:x.regular_hours||null,mealPeriodHours:x.meal_period_hours||null,hoursStatus:x.hours_status||"unknown",lastVerifiedAt:x.last_verified_at||null};
-  });
-  dataReady=true;const geoCount=records.filter(r=>r.latitude!=null&&r.longitude!=null).length;
-  msg.textContent=`Loaded ${records.length} V2 restaurants • ${geoCount} with GPS.`;setTimeout(()=>{if(msg.textContent.startsWith("Loaded "))msg.textContent=""},2200);
- }catch(err){console.error(err);dataReady=false;msg.textContent="I couldn't connect to the V2 restaurant database. Please try again.";}
-}
-loadRestaurants();
-
-document.getElementById("current").onclick=()=>{
- if(!navigator.geolocation){msg.textContent="Location is not available in this browser. Choose a town instead.";return;}
- document.getElementById("locationStatus").textContent="Getting a fresh GPS location…";msg.textContent="Getting your current location…";
- navigator.geolocation.getCurrentPosition(pos=>{
-  state.location="current";state.town=null;state.coords={lat:pos.coords.latitude,lon:pos.coords.longitude};state.accuracy=pos.coords.accuracy;
-  const n=nearestTown(state.coords.lat,state.coords.lon);document.getElementById("locationStatus").textContent=`Location ready • ${n.town}`;setLocationLabel();
-  msg.textContent=`Using GPS near ${n.town} (±${Math.round(state.accuracy)} m).`;
- },err=>{
-  document.getElementById("locationStatus").textContent="Location permission not available";
-  msg.textContent=err.code===2?"Your device could not determine a current location.":err.code===3?"Location lookup timed out.":"Choose a town instead, or allow location access in your browser.";
- },{enableHighAccuracy:true,maximumAge:0,timeout:15000});
-};
-
-document.getElementById("townToggle").onclick=()=>{const t=document.getElementById("towns");t.hidden=!t.hidden;};
-document.querySelectorAll(".towns button").forEach(b=>b.onclick=()=>{
- document.querySelectorAll(".towns button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");
- state.town=b.textContent;state.location="town";state.coords=null;state.accuracy=null;setLocationLabel();msg.textContent="Searching near "+state.town+".";
-});
-document.querySelectorAll(".food-grid button").forEach(b=>b.onclick=()=>{
- document.querySelectorAll(".food-grid button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");state.food=b.dataset.food;msg.textContent="Looking for "+b.innerText+"…";
-});
-document.getElementById("surprise").onclick=()=>{
- if(!dataReady){msg.textContent="The V2 restaurant database is still loading. Please try again in a moment.";return;}
- const buttons=[...document.querySelectorAll(".food-grid button")];
- const candidates=buttons.filter(b=>{
-  const food=b.dataset.food;
-  return filterBase(records).some(r=>r.food.includes(normalizeFood(food))&&(!state.service||r.services.includes(normalizeService(state.service))||state.service!=="drive_thru"));
- });
- buttons.forEach(x=>x.classList.remove("sel"));
- if(!candidates.length){msg.textContent="I couldn't find an available food choice here yet. Try another town or service.";return;}
- const b=candidates[Math.floor(Math.random()*candidates.length)];
- b.classList.add("sel");state.food=b.dataset.food;msg.textContent="Surprise choice: "+b.innerText+"!";
-};
-document.querySelectorAll(".how-grid button").forEach(b=>b.onclick=()=>{
- document.querySelectorAll(".how-grid button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");state.service=b.dataset.service;msg.textContent="Service: "+b.innerText+".";
-});
-
-function filterBase(pool){
- if(state.town)return pool.filter(r=>r.town.toLowerCase()===state.town.toLowerCase());
- if(state.location==="current"&&state.coords){const n=nearestTown(state.coords.lat,state.coords.lon);return pool.filter(r=>r.town.toLowerCase()===n.town.toLowerCase());}
- return pool;
-}
-function choose(excluded=[]){
- let pool=filterBase(records.filter(r=>!excluded.includes(r.id)));
- if(state.location==="current"&&state.coords)for(const r of pool)r.distance=r.latitude!=null&&r.longitude!=null?distanceMiles(state.coords.lat,state.coords.lon,r.latitude,r.longitude):null;
- if(state.food)pool=pool.filter(r=>r.food.includes(normalizeFood(state.food)));
- if(state.service)pool=pool.filter(r=>r.services.includes(normalizeService(state.service)));
- if(!pool.length&&state.service&&state.service!=="drive_thru"){
-  pool=filterBase(records.filter(r=>!excluded.includes(r.id)));
-  if(state.food)pool=pool.filter(r=>r.food.includes(normalizeFood(state.food)));
- }
- pool.sort((a,b)=>{
-  if(state.location==="current"){
-   const ag=a.distance==null,bg=b.distance==null;if(ag!==bg)return ag?1:-1;
-   if(!ag&&Math.abs(a.distance-b.distance)>0.05)return a.distance-b.distance;
+function render(list){
+  const el=document.querySelector("#results");
+  if(!el) return;
+  if(!Array.isArray(list) || list.length===0){
+    el.innerHTML='<div class="empty"><strong>No recommendations found.</strong><br>Try a larger distance, another food choice, or enable the testing hours option.</div>';
+    return;
   }
-  return b.quality-a.quality;
- });
- return pool[0];
+  el.innerHTML="<h2>Recommendations</h2>"+list.map((r,i)=>{
+    const cats=Array.isArray(r.categories)?r.categories.slice(0,5):[];
+    return `<div class="result">
+      <strong>${i+1}. ${String(r.name||"Restaurant")}</strong>
+      <div class="muted">${String(r.town||"")}${r.status==="transition"?" · hours/status need verification":""}</div>
+      <div>${cats.map(c=>`<span class="pill">${String(c)}</span>`).join("")}</div>
+      ${r.address?`<div class="muted">${String(r.address)}</div>`:""}
+    </div>`;
+  }).join("");
 }
-function showPick(pick){
- if(!pick){recommendation.hidden=true;msg.textContent="I could not find a match for those choices yet. Try removing one refinement.";return;}
- state.lastPick=pick;recommendation.hidden=false;document.getElementById("pickName").textContent=pick.name;
- const distance=pick.distance!=null?` • ${pick.distance.toFixed(1)} mi away`:"";
- document.getElementById("pickMeta").textContent=(pick.town||"SouthCoast")+distance+" • "+(state.service?state.service.replace("_"," "):"flexible service");
- let reason="Fits what you're craving";if(state.location==="current")reason+=", near your current location";if(state.service)reason+=", with your preferred service";if(state.town)reason+=", in "+state.town;reason+=".";
- document.getElementById("pickReason").textContent=reason;recommendation.scrollIntoView({behavior:"smooth",block:"start"});msg.textContent="";
-}
-document.getElementById("find").onclick=()=>{
- if(!dataReady){msg.textContent="The V2 restaurant database is still loading. Please try again in a moment.";return;}
- if(!state.location){msg.textContent="First choose your location.";document.querySelector(".location").scrollIntoView({behavior:"smooth"});return;}
- if(!state.food){msg.textContent="First choose what you're craving.";document.querySelector(".food").scrollIntoView({behavior:"smooth"});return;}
- state.excluded=[];showPick(choose());
-};
-document.querySelectorAll("[data-refine]").forEach(b=>b.onclick=()=>{
- const action=b.dataset.refine;if(!state.lastPick)return;
- if(action==="different"||action==="another"){state.excluded=[...new Set([...state.excluded,state.lastPick.id])];showPick(choose(state.excluded));return;}
- if(action==="closer"&&state.location==="current"){state.excluded=[...new Set([...state.excluded,state.lastPick.id])];showPick(choose(state.excluded));return;}
- if(action==="cheaper"){
-  const candidates=records.filter(r=>!state.excluded.includes(r.id)&&(!state.food||r.food.includes(normalizeFood(state.food)))&&(!state.town||r.town.toLowerCase()===state.town.toLowerCase())&&r.price!=null);
-  candidates.sort((a,b)=>a.price-b.price);showPick(candidates[0]||state.lastPick);
- }
-});
-document.getElementById("go").onclick=()=>{
- if(state.lastPick?.website)window.open(state.lastPick.website,"_blank","noopener");else msg.textContent="Restaurant website is not available yet.";
-};
-</script>
-</body>
-</html>
+
+document.querySelector("#find").onclick=()=>{
+  const resultsEl=document.querySelector("#results");
+  try{
+    const food=document.querySelector("#food").value || "";
+    const when=document.querySelector("#when").value || "device";
+    const allowUnknown=document.querySelector("#unknown").checked;
+    const town=townEl.value;
+
+    if(!town){
+      resultsEl.innerHTML='<div class="error">Please choose a town first.</div>';
+      return;
+    }
+
+    const now=new Date();
+    let day=["sun","mon","tue","wed","thu","fri","sat"][now.getDay()];
+    let mins=now.getHours()*60+now.getMinutes();
+
+    if(when==="morning") mins=8*60;
+    if(when==="lunch") mins=12*60;
+    if(when==="dinner") mins=19*60;
+    if(when==="any") mins=null;
+
+    let candidates=(restaurants.restaurants||[]).filter(r=>{
+      if(r.town!==town) return false;
+      if(r.status==="closed") return false;
+      if(r.status!=="active" && !allowUnknown) return false;
+      return true;
+    });
+
+    const wanted=(food||"").toLowerCase();
+
+    candidates=candidates.filter(r=>{
+      const cats=Array.isArray(r.categories)?r.categories.map(x=>String(x).toLowerCase()):[];
+      if(!wanted) return true;
+      if(wanted==="breakfast") return cats.includes("breakfast");
+      if(wanted==="lunch" || wanted==="dinner") return cats.includes(wanted) || cats.length>0;
+      return cats.some(c=>c===wanted || c.includes(wanted) || wanted.includes(c));
+    });
+
+    if(mins!==null){
+      candidates=candidates.filter(r=>{
+        const hours=r.hours && r.hours[day];
+        if(!hours){
+          return allowUnknown;
+        }
+        try{
+          const a=String(hours[0]).split(":").map(Number);
+          const b=String(hours[1]).split(":").map(Number);
+          const open=a[0]*60+a[1], close=b[0]*60+b[1];
+          if(mins<open || mins>close) return false;
+
+          if(wanted==="breakfast"){
+            const bp=r.mealPeriods && r.mealPeriods.breakfast && r.mealPeriods.breakfast[day];
+            if(!bp) return allowUnknown;
+            const ba=String(bp[0]).split(":").map(Number);
+            const bb=String(bp[1]).split(":").map(Number);
+            const bs=ba[0]*60+ba[1], be=bb[0]*60+bb[1];
+            if(mins<bs || mins>be) return false;
+          }
+          return true;
+        }catch(e){
+          return allowUnknown;
+        }
+      });
+    }
+
+    candidates.sort((a,b)=>{
+      const ac=Array.isArray(a.categories)?a.categories.map(x=>String(x).toLowerCase()):[];
+      const bc=Array.isArray(b.categories)?b.categories.map(x=>String(x).toLowerCase()):[];
+      const am=wanted && ac.includes(wanted)?30:0;
+      const bm=wanted && bc.includes(wanted)?30:0;
+      return bm-am;
+    });
+
+    render(candidates.slice(0,10));
+  }catch(e){
+    console.error(e);
+    resultsEl.innerHTML='<div class="error"><strong>Test error:</strong> '+String(e.message||e)+'</div>';
+  }
+};</script>
+</body></html>
